@@ -1,3 +1,4 @@
+#!O-Scope
 This repository contains the PCB design files, firmware, and software for the O-Scope, which is a low-cost (i.e., a cut-tape BoM cost of about $30 
 as of fall 2020) two-channel oscilloscope / single-channel waveform generator up to a bandwidth of 200 kHz that fits into a solderless breadboard.  The oscilloscope's vertical resolution is 12 bits and each channel is sampled at 4 MS/s.  Each channel has a sample buffer of 1,500 points.  The 
 oscilloscope probes are differential and have an equivalent input impedance of 1 MΩ || 15 pF with two input voltage ranges: ±10V and ±2V.  The 
