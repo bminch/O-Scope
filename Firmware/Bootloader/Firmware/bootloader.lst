@@ -1,0 +1,3649 @@
+
+bootloader.elf:     file format elf32-pic30
+
+Disassembly of section .reset:
+
+00000000 <.reset>:
+   0:	00 02 04    	goto      0x200 <__resetPRI>
+   2:	00 00 00 
+Disassembly of section .text:
+
+00000200 <__resetPRI>:
+ 200:	0f a8 20    	mov.w     #0xa80, w15
+ 202:	0e 7f 22    	mov.w     #0x27f0, w14
+ 204:	0e 01 88    	mov.w     w14, 0x20
+ 206:	00 00 00    	nop       
+ 208:	00 00 20    	mov.w     #0x0, w0
+ 20a:	00 00 e0    	cp0.w     w0
+ 20c:	02 00 32    	bra       Z, 0x212
+ 20e:	00 01 20    	mov.w     #0x10, w0
+ 210:	20 02 88    	mov.w     w0, 0x44
+
+00000212 <CORCON_RESET>:
+ 212:	0c 00 07    	rcall     0x22c <__psv_init>
+ 214:	e0 fb 20    	mov.w     #0xfbe, w0
+ 216:	01 00 20    	mov.w     #0x0, w1
+ 218:	0f 00 07    	rcall     0x238
+ 21a:	00 00 20    	mov.w     #0x0, w0
+ 21c:	00 00 e0    	cp0.w     w0
+ 21e:	02 00 32    	bra       Z, 0x224
+ 220:	00 00 02    	call      0x0 <__resetPRI-0x200>
+ 222:	00 00 00 
+
+00000224 <L11>:
+ 224:	22 0f 02    	call      0xf22 <_main>
+ 226:	00 00 00 
+ 228:	00 40 da    	.pword 0xda4000
+ 22a:	00 00 fe    	reset     
+
+0000022c <__psv_init>:
+ 22c:	00 07 20    	mov.w     #0x70, w0
+ 22e:	00 00 e0    	cp0.w     w0
+ 230:	02 00 32    	bra       Z, 0x236
+ 232:	00 20 20    	mov.w     #0x200, w0
+ 234:	90 01 88    	mov.w     w0, 0x32
+
+00000236 <L12>:
+ 236:	00 00 06    	return    
+
+00000238 <__data_init>:
+ 238:	a1 02 88    	mov.w     w1, 0x54
+ 23a:	80 00 78    	mov.w     w0, w1
+ 23c:	00 00 eb    	clr.w     w0
+ 23e:	1a 00 37    	bra       0x274 <L41>
+
+00000240 <L11>:
+ 240:	e2 80 40    	add.w     w1, #0x2, w1
+ 242:	54 a0 b4    	addc.w    0x54
+ 244:	91 01 ba    	tblrdl.w  [w1], w3
+ 246:	e2 80 40    	add.w     w1, #0x2, w1
+ 248:	54 a0 b4    	addc.w    0x54
+ 24a:	91 02 ba    	tblrdl.w  [w1], w5
+ 24c:	e2 80 40    	add.w     w1, #0x2, w1
+ 24e:	54 a0 b4    	addc.w    0x54
+ 250:	00 02 eb    	clr.w     w4
+ 252:	47 2b de    	lsr.w     w5, #0x7, w6
+ 254:	f5 07 b2    	and.w     #0x7f, w5
+ 256:	a6 01 88    	mov.w     w6, 0x34
+ 258:	60 2c e1    	cp.b      w5, #0x0
+ 25a:	08 00 3a    	bra       NZ, 0x26c <L21>
+
+0000025c <L91>:
+ 25c:	00 49 eb    	clr.b     [w2]
+ 25e:	02 01 e8    	inc.w     w2, w2
+ 260:	02 00 39    	bra       NC, 0x266 <L81>
+ 262:	34 20 ec    	inc.w     0x34
+ 264:	02 f0 a0    	bset.w    w2, #0xf
+
+00000266 <L81>:
+ 266:	83 01 e9    	dec.w     w3, w3
+ 268:	f9 ff 3e    	bra       GTU, 0x25c <L91>
+ 26a:	04 00 37    	bra       0x274 <L41>
+
+0000026c <L21>:
+ 26c:	61 28 e1    	cp.w      w5, #0x1
+ 26e:	01 00 32    	bra       Z, 0x272 <L31>
+ 270:	00 82 eb    	setm.w    w4
+
+00000272 <L31>:
+ 272:	04 00 07    	rcall     0x27c <L12>
+
+00000274 <L41>:
+ 274:	11 01 ba    	tblrdl.w  [w1], w2
+ 276:	02 00 e0    	cp0.w     w2
+ 278:	e3 ff 3a    	bra       NZ, 0x240
+ 27a:	00 00 06    	return    
+
+0000027c <L12>:
+ 27c:	04 d0 a3    	btst.c    w4, #0xd
+ 27e:	e2 0f 49    	addc.w    w2, #0x2, [w15]
+ 280:	1c 00 39    	bra       NC, 0x2ba <L22>
+ 282:	81 02 78    	mov.w     w1, w5
+ 284:	35 49 ba    	tblrdl.b  [w5++], [w2]
+ 286:	02 01 e8    	inc.w     w2, w2
+ 288:	02 00 39    	bra       NC, 0x28e <L32>
+ 28a:	34 20 ec    	inc.w     0x34
+ 28c:	02 f0 a0    	bset.w    w2, #0xf
+
+0000028e <L32>:
+ 28e:	83 01 e9    	dec.w     w3, w3
+ 290:	0f 00 32    	bra       Z, 0x2b0
+ 292:	25 49 ba    	tblrdl.b  [w5--], [w2]
+ 294:	02 01 e8    	inc.w     w2, w2
+ 296:	02 00 39    	bra       NC, 0x29c <L33>
+ 298:	34 20 ec    	inc.w     0x34
+ 29a:	02 f0 a0    	bset.w    w2, #0xf
+
+0000029c <L33>:
+ 29c:	83 01 e9    	dec.w     w3, w3
+ 29e:	08 00 32    	bra       Z, 0x2b0
+ 2a0:	04 00 e0    	cp0.w     w4
+ 2a2:	06 00 32    	bra       Z, 0x2b0
+ 2a4:	15 c9 ba    	tblrdh.b  [w5], [w2]
+ 2a6:	02 01 e8    	inc.w     w2, w2
+ 2a8:	02 00 39    	bra       NC, 0x2ae <L34>
+ 2aa:	34 20 ec    	inc.w     0x34
+ 2ac:	02 f0 a0    	bset.w    w2, #0xf
+
+000002ae <L34>:
+ 2ae:	83 01 e9    	dec.w     w3, w3
+
+000002b0 <L42>:
+ 2b0:	81 80 e8    	inc2.w    w1, w1
+ 2b2:	54 a0 b4    	addc.w    0x54
+ 2b4:	03 00 e0    	cp0.w     w3
+ 2b6:	e2 ff 3a    	bra       NZ, 0x27c <L12>
+ 2b8:	00 00 06    	return    
+
+000002ba <L22>:
+ 2ba:	91 02 ba    	tblrdl.w  [w1], w5
+ 2bc:	05 59 78    	mov.b     w5, [w2++]
+ 2be:	83 01 e9    	dec.w     w3, w3
+ 2c0:	f7 ff 32    	bra       Z, 0x2b0
+ 2c2:	c8 2a de    	lsr.w     w5, #0x8, w5
+ 2c4:	05 59 78    	mov.b     w5, [w2++]
+ 2c6:	83 01 e9    	dec.w     w3, w3
+ 2c8:	f3 ff 32    	bra       Z, 0x2b0
+ 2ca:	04 00 e0    	cp0.w     w4
+ 2cc:	f1 ff 32    	bra       Z, 0x2b0
+ 2ce:	11 d9 ba    	tblrdh.b  [w1], [w2++]
+ 2d0:	ee ff 37    	bra       0x2ae <L34>
+Disassembly of section __CONFIG4:
+
+000157f8 <__CONFIG4>:
+   157f8:	3f 03 00    	nop       
+Disassembly of section __CONFIG3:
+
+000157fa <__CONFIG3>:
+   157fa:	83 0f 00    	nop       
+Disassembly of section __CONFIG2:
+
+000157fc <__CONFIG2>:
+   157fc:	1f f1 00    	nop       
+Disassembly of section __CONFIG1:
+
+000157fe <__CONFIG1>:
+   157fe:	3f 3a 00    	nop       
+Disassembly of section .application_ivt:
+
+00001000 <__DEFAULT_VECTOR-0x134>:
+    1000:	00 02 04    	goto      0x200 <__resetPRI>
+    1002:	00 00 00 
+    1004:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1006:	00 00 00 
+    1008:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    100a:	00 00 00 
+    100c:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    100e:	00 00 00 
+    1010:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1012:	00 00 00 
+    1014:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1016:	00 00 00 
+    1018:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    101a:	00 00 00 
+    101c:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    101e:	00 00 00 
+    1020:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1022:	00 00 00 
+    1024:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1026:	00 00 00 
+    1028:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    102a:	00 00 00 
+    102c:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    102e:	00 00 00 
+    1030:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1032:	00 00 00 
+    1034:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1036:	00 00 00 
+    1038:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    103a:	00 00 00 
+    103c:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    103e:	00 00 00 
+    1040:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1042:	00 00 00 
+    1044:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1046:	00 00 00 
+    1048:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    104a:	00 00 00 
+    104c:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    104e:	00 00 00 
+    1050:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1052:	00 00 00 
+    1054:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1056:	00 00 00 
+    1058:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    105a:	00 00 00 
+    105c:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    105e:	00 00 00 
+    1060:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1062:	00 00 00 
+    1064:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1066:	00 00 00 
+    1068:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    106a:	00 00 00 
+    106c:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    106e:	00 00 00 
+    1070:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1072:	00 00 00 
+    1074:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1076:	00 00 00 
+    1078:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    107a:	00 00 00 
+    107c:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    107e:	00 00 00 
+    1080:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1082:	00 00 00 
+    1084:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1086:	00 00 00 
+    1088:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    108a:	00 00 00 
+    108c:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    108e:	00 00 00 
+    1090:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1092:	00 00 00 
+    1094:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1096:	00 00 00 
+    1098:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    109a:	00 00 00 
+    109c:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    109e:	00 00 00 
+    10a0:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10a2:	00 00 00 
+    10a4:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10a6:	00 00 00 
+    10a8:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10aa:	00 00 00 
+    10ac:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10ae:	00 00 00 
+    10b0:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10b2:	00 00 00 
+    10b4:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10b6:	00 00 00 
+    10b8:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10ba:	00 00 00 
+    10bc:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10be:	00 00 00 
+    10c0:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10c2:	00 00 00 
+    10c4:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10c6:	00 00 00 
+    10c8:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10ca:	00 00 00 
+    10cc:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10ce:	00 00 00 
+    10d0:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10d2:	00 00 00 
+    10d4:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10d6:	00 00 00 
+    10d8:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10da:	00 00 00 
+    10dc:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10de:	00 00 00 
+    10e0:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10e2:	00 00 00 
+    10e4:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10e6:	00 00 00 
+    10e8:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10ea:	00 00 00 
+    10ec:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10ee:	00 00 00 
+    10f0:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10f2:	00 00 00 
+    10f4:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10f6:	00 00 00 
+    10f8:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10fa:	00 00 00 
+    10fc:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    10fe:	00 00 00 
+    1100:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1102:	00 00 00 
+    1104:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1106:	00 00 00 
+    1108:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    110a:	00 00 00 
+    110c:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    110e:	00 00 00 
+    1110:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1112:	00 00 00 
+    1114:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1116:	00 00 00 
+    1118:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    111a:	00 00 00 
+    111c:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    111e:	00 00 00 
+    1120:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1122:	00 00 00 
+    1124:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1126:	00 00 00 
+    1128:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    112a:	00 00 00 
+    112c:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    112e:	00 00 00 
+    1130:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1132:	00 00 00 
+
+00001134 <__DEFAULT_VECTOR>:
+    1134:	d2 0f 04    	goto      0xfd2 <__DefaultInterrupt>
+    1136:	00 00 00 
+Disassembly of section .ivt:
+
+00000004 <.ivt>:
+   4:	04 10 00    	nop       
+   6:	08 10 00    	nop       
+   8:	0c 10 00    	nop       
+   a:	10 10 00    	nop       
+   c:	14 10 00    	nop       
+   e:	34 11 00    	nop       
+  10:	34 11 00    	nop       
+  12:	34 11 00    	nop       
+  14:	18 10 00    	nop       
+  16:	1c 10 00    	nop       
+  18:	20 10 00    	nop       
+  1a:	24 10 00    	nop       
+  1c:	28 10 00    	nop       
+  1e:	2c 10 00    	nop       
+  20:	30 10 00    	nop       
+  22:	34 10 00    	nop       
+  24:	38 10 00    	nop       
+  26:	3c 10 00    	nop       
+  28:	40 10 00    	nop       
+  2a:	44 10 00    	nop       
+  2c:	48 10 00    	nop       
+  2e:	4c 10 00    	nop       
+  30:	50 10 00    	nop       
+  32:	34 11 00    	nop       
+  34:	54 10 00    	nop       
+  36:	58 10 00    	nop       
+  38:	5c 10 00    	nop       
+  3a:	60 10 00    	nop       
+  3c:	64 10 00    	nop       
+  3e:	34 11 00    	nop       
+  40:	68 10 00    	nop       
+  42:	6c 10 00    	nop       
+  44:	70 10 00    	nop       
+  46:	74 10 00    	nop       
+  48:	78 10 00    	nop       
+  4a:	7c 10 00    	nop       
+  4c:	80 10 00    	nop       
+  4e:	84 10 00    	nop       
+  50:	88 10 00    	nop       
+  52:	8c 10 00    	nop       
+  54:	90 10 00    	nop       
+  56:	94 10 00    	nop       
+  58:	34 11 00    	nop       
+  5a:	34 11 00    	nop       
+  5c:	98 10 00    	nop       
+  5e:	9c 10 00    	nop       
+  60:	a0 10 00    	nop       
+  62:	a4 10 00    	nop       
+  64:	a8 10 00    	nop       
+  66:	ac 10 00    	nop       
+  68:	b0 10 00    	nop       
+  6a:	b4 10 00    	nop       
+  6c:	b8 10 00    	nop       
+  6e:	bc 10 00    	nop       
+  70:	c0 10 00    	nop       
+  72:	34 11 00    	nop       
+  74:	34 11 00    	nop       
+  76:	c4 10 00    	nop       
+  78:	c8 10 00    	nop       
+  7a:	34 11 00    	nop       
+  7c:	34 11 00    	nop       
+  7e:	cc 10 00    	nop       
+  80:	d0 10 00    	nop       
+  82:	34 11 00    	nop       
+  84:	34 11 00    	nop       
+  86:	34 11 00    	nop       
+  88:	34 11 00    	nop       
+  8a:	34 11 00    	nop       
+  8c:	34 11 00    	nop       
+  8e:	d4 10 00    	nop       
+  90:	d8 10 00    	nop       
+  92:	34 11 00    	nop       
+  94:	34 11 00    	nop       
+  96:	dc 10 00    	nop       
+  98:	e0 10 00    	nop       
+  9a:	e4 10 00    	nop       
+  9c:	34 11 00    	nop       
+  9e:	34 11 00    	nop       
+  a0:	34 11 00    	nop       
+  a2:	34 11 00    	nop       
+  a4:	e8 10 00    	nop       
+  a6:	34 11 00    	nop       
+  a8:	34 11 00    	nop       
+  aa:	34 11 00    	nop       
+  ac:	34 11 00    	nop       
+  ae:	ec 10 00    	nop       
+  b0:	f0 10 00    	nop       
+  b2:	f4 10 00    	nop       
+  b4:	34 11 00    	nop       
+  b6:	f8 10 00    	nop       
+  b8:	fc 10 00    	nop       
+  ba:	00 11 00    	nop       
+  bc:	34 11 00    	nop       
+  be:	34 11 00    	nop       
+  c0:	04 11 00    	nop       
+  c2:	08 11 00    	nop       
+  c4:	0c 11 00    	nop       
+  c6:	10 11 00    	nop       
+  c8:	34 11 00    	nop       
+  ca:	34 11 00    	nop       
+  cc:	14 11 00    	nop       
+  ce:	18 11 00    	nop       
+  d0:	34 11 00    	nop       
+  d2:	34 11 00    	nop       
+  d4:	34 11 00    	nop       
+  d6:	34 11 00    	nop       
+  d8:	34 11 00    	nop       
+  da:	34 11 00    	nop       
+  dc:	1c 11 00    	nop       
+  de:	34 11 00    	nop       
+  e0:	34 11 00    	nop       
+  e2:	20 11 00    	nop       
+  e4:	24 11 00    	nop       
+  e6:	28 11 00    	nop       
+  e8:	2c 11 00    	nop       
+  ea:	34 11 00    	nop       
+  ec:	34 11 00    	nop       
+  ee:	34 11 00    	nop       
+  f0:	34 11 00    	nop       
+  f2:	34 11 00    	nop       
+  f4:	34 11 00    	nop       
+  f6:	34 11 00    	nop       
+  f8:	34 11 00    	nop       
+  fa:	34 11 00    	nop       
+  fc:	34 11 00    	nop       
+  fe:	30 11 00    	nop       
+Disassembly of section .const:
+
+000082d2 <_Device>:
+    82d2:	12 01       	.word 0x112
+    82d4:	00 02       	.word 0x200
+    82d6:	00 00       	.word 0
+    82d8:	00 40       	.word 0x4000
+    82da:	66 66       	.word 0x6666
+    82dc:	21 43       	.word 0x4321
+    82de:	00 00       	.word 0
+    82e0:	01 02       	.word 0x201
+    82e2:	00 01       	.word 0x100
+
+000082e4 <_Configuration1>:
+    82e4:	09 02       	.word 0x209
+    82e6:	12 00       	.word 0x12
+    82e8:	01 01       	.word 0x101
+    82ea:	00 a0       	.word 0xa000
+    82ec:	32 09       	.word 0x932
+    82ee:	04 00       	.word 0x4
+    82f0:	00 00       	.word 0
+    82f2:	ff 00       	.word 0xff
+    82f4:	ff 00       	.word 0xff
+
+000082f6 <_String0>:
+    82f6:	04 03       	.word 0x304
+    82f8:	09 04       	.word 0x409
+
+000082fa <_String1>:
+    82fa:	1a 03       	.word 0x31a
+    82fc:	4f 00       	.word 0x4f
+    82fe:	6c 00       	.word 0x6c
+    8300:	69 00       	.word 0x69
+    8302:	6e 00       	.word 0x6e
+    8304:	20 00       	.word 0x20
+    8306:	43 00       	.word 0x43
+    8308:	6f 00       	.word 0x6f
+    830a:	6c 00       	.word 0x6c
+    830c:	6c 00       	.word 0x6c
+    830e:	65 00       	.word 0x65
+    8310:	67 00       	.word 0x67
+    8312:	65 00       	.word 0x65
+
+00008314 <_String2>:
+    8314:	2e 03       	.word 0x32e
+    8316:	50 00       	.word 0x50
+    8318:	49 00       	.word 0x49
+    831a:	43 00       	.word 0x43
+    831c:	32 00       	.word 0x32
+    831e:	34 00       	.word 0x34
+    8320:	46 00       	.word 0x46
+    8322:	4a 00       	.word 0x4a
+    8324:	20 00       	.word 0x20
+    8326:	55 00       	.word 0x55
+    8328:	53 00       	.word 0x53
+    832a:	42 00       	.word 0x42
+    832c:	20 00       	.word 0x20
+    832e:	42 00       	.word 0x42
+    8330:	6f 00       	.word 0x6f
+    8332:	6f 00       	.word 0x6f
+    8334:	74 00       	.word 0x74
+    8336:	6c 00       	.word 0x6c
+    8338:	6f 00       	.word 0x6f
+    833a:	61 00       	.word 0x61
+    833c:	64 00       	.word 0x64
+    833e:	65 00       	.word 0x65
+    8340:	72 00       	.word 0x72
+Disassembly of section .text:
+
+00000342 <_InitUSB>:
+BYTE USB_device_status;
+BYTE USB_USTAT;
+BYTE USB_USWSTAT;
+
+void InitUSB(void) {
+ 342:	04 00 fa    	lnk       #0x4
+
+00000344 <.LSM1>:
+    unsigned int *U1EP;
+    BYTE n;
+
+    U1CONbits.PPBRST = 1;
+ 344:	94 24 a8    	bset.b    0x494, #0x1
+
+00000346 <.LSM2>:
+    U1ADDR = 0;
+ 346:	00 02 eb    	clr.w     w4
+ 348:	b4 24 88    	mov.w     w4, 0x496
+
+0000034a <.LSM3>:
+    U1EIR = 0xFF;
+ 34a:	f4 0f 20    	mov.w     #0xff, w4
+ 34c:	74 24 88    	mov.w     w4, 0x48e
+
+0000034e <.LSM4>:
+    U1CONbits.PPBRST = 0;
+ 34e:	94 24 a9    	bclr.b    0x494, #0x1
+
+00000350 <.LSM5>:
+    U1EP = (unsigned int *)&U1EP0;
+ 350:	a4 4a 20    	mov.w     #0x4aa, w4
+ 352:	14 07 98    	mov.w     w4, [w14+2]
+
+00000354 <.LSM6>:
+    for (n = 0; n<16; n++)
+ 354:	00 42 eb    	clr.b     w4
+ 356:	04 4f 78    	mov.b     w4, [w14]
+ 358:	08 00 37    	bra       0x36a
+
+0000035a <.L3>:
+        U1EP[n] = ENDPT_DISABLED;
+ 35a:	9e 42 78    	mov.b     [w14], w5
+ 35c:	05 82 fb    	ze        w5, w4
+ 35e:	04 02 42    	add.w     w4, w4, w4
+ 360:	9e 02 90    	mov.w     [w14+2], w5
+ 362:	04 82 42    	add.w     w5, w4, w4
+ 364:	80 02 eb    	clr.w     w5
+ 366:	05 0a 78    	mov.w     w5, [w4]
+
+00000368 <.LSM8>:
+ 368:	1e 4f e8    	inc.b     [w14], [w14]
+
+0000036a <.L2>:
+ 36a:	1e 42 78    	mov.b     [w14], w4
+ 36c:	ef 4f 52    	sub.b     w4, #0xf, [w15]
+ 36e:	f5 ff 36    	bra       LEU, 0x35a
+
+00000370 <.LSM9>:
+    U1EP0 = ENDPT_CONTROL;
+ 370:	d4 00 20    	mov.w     #0xd, w4
+ 372:	54 25 88    	mov.w     w4, 0x4aa
+
+00000374 <.LSM10>:
+    BD[EP0OUT].bytecount = MAX_PACKET_SIZE;
+ 374:	04 c4 b3    	mov.b     #0x40, w4
+ 376:	84 42 78    	mov.b     w4, w5
+ 378:	06 a0 20    	mov.w     #0xa00, w6
+ 37a:	05 4b 78    	mov.b     w5, [w6]
+
+0000037c <.LSM11>:
+    BD[EP0OUT].address = EP0_OUT_buffer;    // EP0 OUT gets a buffer
+ 37c:	04 80 20    	mov.w     #0x800, w4
+ 37e:	14 50 88    	mov.w     w4, 0xa02
+
+00000380 <.LSM12>:
+    BD[EP0OUT].status = 0x88;               // set UOWN bit (USB can write)
+ 380:	84 c8 b3    	mov.b     #0x88, w4
+ 382:	84 42 78    	mov.b     w4, w5
+ 384:	16 a0 20    	mov.w     #0xa01, w6
+ 386:	05 4b 78    	mov.b     w5, [w6]
+
+00000388 <.LSM13>:
+    BD[EP0IN].address = EP0_IN_buffer;      // EP0 IN gets a buffer
+ 388:	04 84 20    	mov.w     #0x840, w4
+ 38a:	34 50 88    	mov.w     w4, 0xa06
+
+0000038c <.LSM14>:
+    BD[EP0IN].status = 0x08;                // clear UOWN bit (MCU can write)
+ 38c:	84 c0 b3    	mov.b     #0x8, w4
+ 38e:	84 42 78    	mov.b     w4, w5
+ 390:	56 a0 20    	mov.w     #0xa05, w6
+ 392:	05 4b 78    	mov.b     w5, [w6]
+
+00000394 <.LSM15>:
+    U1CNFG1 = 0x00;
+ 394:	00 02 eb    	clr.w     w4
+ 396:	34 25 88    	mov.w     w4, 0x4a6
+
+00000398 <.LSM16>:
+    U1CNFG2 = 0x00;
+ 398:	00 02 eb    	clr.w     w4
+ 39a:	44 25 88    	mov.w     w4, 0x4a8
+
+0000039c <.LSM17>:
+    U1BDTP1 = (unsigned int)BD>>8;
+ 39c:	04 a0 20    	mov.w     #0xa00, w4
+ 39e:	48 22 de    	lsr.w     w4, #0x8, w4
+ 3a0:	c4 24 88    	mov.w     w4, 0x498
+
+000003a2 <.LSM18>:
+    U1OTGCONbits.OTGEN = 1;
+ 3a2:	86 44 a8    	bset.b    0x486, #0x2
+
+000003a4 <.LSM19>:
+    U1OTGCONbits.DPPULUP = 1;
+ 3a4:	86 e4 a8    	bset.b    0x486, #0x7
+
+000003a6 <.LSM20>:
+    U1PWRCbits.USBPWR = 1;
+ 3a6:	88 04 a8    	bset.b    0x488, #0x0
+
+000003a8 <.LSM21>:
+    U1CONbits.PKTDIS = 0;
+ 3a8:	94 a4 a9    	bclr.b    0x494, #0x5
+
+000003aa <.LSM22>:
+    USB_curr_config = 0x00;
+ 3aa:	00 42 eb    	clr.b     w4
+ 3ac:	84 42 78    	mov.b     w4, w5
+ 3ae:	96 89 20    	mov.w     #0x899, w6
+ 3b0:	05 4b 78    	mov.b     w5, [w6]
+
+000003b2 <.LSM23>:
+    USB_USWSTAT = 0x00;         // default to powered state
+ 3b2:	00 42 eb    	clr.b     w4
+ 3b4:	84 42 78    	mov.b     w4, w5
+ 3b6:	c6 89 20    	mov.w     #0x89c, w6
+ 3b8:	05 4b 78    	mov.b     w5, [w6]
+
+000003ba <.LSM24>:
+    USB_device_status = 0x01;
+ 3ba:	14 c0 b3    	mov.b     #0x1, w4
+ 3bc:	84 42 78    	mov.b     w4, w5
+ 3be:	a6 89 20    	mov.w     #0x89a, w6
+ 3c0:	05 4b 78    	mov.b     w5, [w6]
+
+000003c2 <.LSM25>:
+    USB_request.setup.bmRequestType = NO_REQUEST;    // No device requests in process
+ 3c2:	00 c2 eb    	setm.b    w4
+ 3c4:	84 42 78    	mov.b     w4, w5
+ 3c6:	c6 88 20    	mov.w     #0x88c, w6
+ 3c8:	05 4b 78    	mov.b     w5, [w6]
+
+000003ca <.LSM26>:
+    USB_request.setup.bRequest = NO_REQUEST;
+ 3ca:	00 c2 eb    	setm.b    w4
+ 3cc:	84 42 78    	mov.b     w4, w5
+ 3ce:	d6 88 20    	mov.w     #0x88d, w6
+ 3d0:	05 4b 78    	mov.b     w5, [w6]
+
+000003d2 <.LSM27>:
+#ifdef SHOW_ENUM_STATUS
+    TRISB = 0x00;               // set all bits of PORTB as outputs
+    PORTB = 0x01;               // set bit zero to indicate Powered status
+#endif
+    while (U1CONbits.SE0) {}
+ 3d2:	00 00 00    	nop       
+
+000003d4 <.L4>:
+ 3d4:	a5 24 80    	mov.w     0x494, w5
+ 3d6:	04 04 20    	mov.w     #0x40, w4
+ 3d8:	04 82 62    	and.w     w5, w4, w4
+ 3da:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ 3dc:	fb ff 3a    	bra       NZ, 0x3d4 <.L4>
+
+000003de <.LSM28>:
+}
+ 3de:	00 80 fa    	ulnk      
+ 3e0:	00 00 06    	return    
+
+000003e2 <_ServiceUSB>:
+
+void ServiceUSB(void) {
+ 3e2:	06 00 fa    	lnk       #0x6
+
+000003e4 <.LSM30>:
+    BUFDESC *buf_desc_ptr;
+    unsigned int *U1EP;
+    BYTE n;
+
+    if (U1IRbits.UERRIF) {
+ 3e4:	54 24 80    	mov.w     0x48a, w4
+ 3e6:	62 02 62    	and.w     w4, #0x2, w4
+ 3e8:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ 3ea:	05 00 32    	bra       Z, 0x3f6 <.L6>
+
+000003ec <.LSM31>:
+        U1EIR = 0xFF;           // clear all flags in U1EIR to clear U1EIR
+ 3ec:	f4 0f 20    	mov.w     #0xff, w4
+ 3ee:	74 24 88    	mov.w     w4, 0x48e
+
+000003f0 <.LSM32>:
+        U1IR = U1IR_UERRIF;     // clear UERRIF
+ 3f0:	24 00 20    	mov.w     #0x2, w4
+ 3f2:	54 24 88    	mov.w     w4, 0x48a
+ 3f4:	aa 00 37    	bra       0x54a
+
+000003f6 <.L6>:
+    } else if (U1IRbits.SOFIF) {
+ 3f6:	54 24 80    	mov.w     0x48a, w4
+ 3f8:	64 02 62    	and.w     w4, #0x4, w4
+ 3fa:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ 3fc:	03 00 32    	bra       Z, 0x404
+
+000003fe <.LSM34>:
+        U1IR = U1IR_SOFIF;      // clear SOFIF
+ 3fe:	44 00 20    	mov.w     #0x4, w4
+ 400:	54 24 88    	mov.w     w4, 0x48a
+ 402:	a3 00 37    	bra       0x54a
+
+00000404 <.L8>:
+    } else if (U1IRbits.IDLEIF) {
+ 404:	54 24 80    	mov.w     0x48a, w4
+ 406:	70 02 62    	and.w     w4, #0x10, w4
+ 408:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ 40a:	03 00 32    	bra       Z, 0x412
+
+0000040c <.LSM36>:
+        U1IR = U1IR_IDLEIF;     // clear IDLEIF
+ 40c:	04 01 20    	mov.w     #0x10, w4
+ 40e:	54 24 88    	mov.w     w4, 0x48a
+ 410:	9c 00 37    	bra       0x54a
+
+00000412 <.L9>:
+//      U1PWRCbits.USUSPND = 1; // put USB module in suspend mode
+#ifdef SHOW_ENUM_STATUS
+        PORTB &= 0xE0;
+        PORTBbits.RB4 = 1;
+#endif
+    } else if (U1IRbits.RESUMEIF) {
+ 412:	55 24 80    	mov.w     0x48a, w5
+ 414:	04 02 20    	mov.w     #0x20, w4
+ 416:	04 82 62    	and.w     w5, w4, w4
+ 418:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ 41a:	03 00 32    	bra       Z, 0x422 <.L10>
+
+0000041c <.LSM38>:
+        U1IR = U1IR_RESUMEIF;   // clear RESUMEIF
+ 41c:	04 02 20    	mov.w     #0x20, w4
+ 41e:	54 24 88    	mov.w     w4, 0x48a
+ 420:	94 00 37    	bra       0x54a
+
+00000422 <.L10>:
+//      U1PWRCbits.USUSPND = 0; // resume USB module operation
+#ifdef SHOW_ENUM_STATUS
+        PORTB &= 0xE0;
+        PORTB |= 0x01<<USB_USWSTAT;
+#endif
+    } else if (U1IRbits.STALLIF) {
+ 422:	55 24 80    	mov.w     0x48a, w5
+ 424:	04 08 20    	mov.w     #0x80, w4
+ 426:	04 82 62    	and.w     w5, w4, w4
+ 428:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ 42a:	03 00 32    	bra       Z, 0x432 <.L11>
+
+0000042c <.LSM40>:
+        U1IR = U1IR_STALLIF;    // clear STALLIF
+ 42c:	04 08 20    	mov.w     #0x80, w4
+ 42e:	54 24 88    	mov.w     w4, 0x48a
+ 430:	8c 00 37    	bra       0x54a
+
+00000432 <.L11>:
+    } else if (U1IRbits.URSTIF) {
+ 432:	54 24 80    	mov.w     0x48a, w4
+ 434:	61 02 62    	and.w     w4, #0x1, w4
+ 436:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ 438:	40 00 32    	bra       Z, 0x4ba
+
+0000043a <.LSM42>:
+        USB_curr_config = 0x00;
+ 43a:	00 42 eb    	clr.b     w4
+ 43c:	04 43 78    	mov.b     w4, w6
+ 43e:	95 89 20    	mov.w     #0x899, w5
+ 440:	86 4a 78    	mov.b     w6, [w5]
+
+00000442 <.LSM43>:
+        while (U1IRbits.TRNIF) {
+ 442:	08 00 37    	bra       0x454 <.L13>
+
+00000444 <.L14>:
+            U1IR = U1IR_TRNIF;  // clear TRNIF to advance the U1STAT FIFO
+ 444:	84 00 20    	mov.w     #0x8, w4
+ 446:	54 24 88    	mov.w     w4, 0x48a
+
+00000448 <.LSM45>:
+            __builtin_nop();    // wait for six instruction cycles...
+ 448:	00 00 00    	nop       
+
+0000044a <.LSM46>:
+            __builtin_nop();
+ 44a:	00 00 00    	nop       
+
+0000044c <.LSM47>:
+            __builtin_nop();
+ 44c:	00 00 00    	nop       
+
+0000044e <.LSM48>:
+            __builtin_nop();
+ 44e:	00 00 00    	nop       
+
+00000450 <.LSM49>:
+            __builtin_nop();
+ 450:	00 00 00    	nop       
+
+00000452 <.LSM50>:
+            __builtin_nop();    // ...to allow a pending TRNIF to appear
+ 452:	00 00 00    	nop       
+
+00000454 <.L13>:
+ 454:	54 24 80    	mov.w     0x48a, w4
+ 456:	68 02 62    	and.w     w4, #0x8, w4
+ 458:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ 45a:	f4 ff 3a    	bra       NZ, 0x444
+
+0000045c <.LSM52>:
+        }
+        U1EP = (unsigned int *)&U1EP0;
+ 45c:	a4 4a 20    	mov.w     #0x4aa, w4
+ 45e:	14 07 98    	mov.w     w4, [w14+2]
+
+00000460 <.LSM53>:
+        for (n = 0; n<16; n++)
+ 460:	00 42 eb    	clr.b     w4
+ 462:	04 4f 78    	mov.b     w4, [w14]
+ 464:	08 00 37    	bra       0x476 <.L15>
+
+00000466 <.L16>:
+            U1EP[n] = ENDPT_DISABLED;   // clear all EP control registers to disable all endpoints
+ 466:	9e 42 78    	mov.b     [w14], w5
+ 468:	05 82 fb    	ze        w5, w4
+ 46a:	04 02 42    	add.w     w4, w4, w4
+ 46c:	9e 02 90    	mov.w     [w14+2], w5
+ 46e:	04 82 42    	add.w     w5, w4, w4
+ 470:	80 02 eb    	clr.w     w5
+ 472:	05 0a 78    	mov.w     w5, [w4]
+
+00000474 <.LSM55>:
+ 474:	1e 4f e8    	inc.b     [w14], [w14]
+
+00000476 <.L15>:
+ 476:	1e 42 78    	mov.b     [w14], w4
+ 478:	ef 4f 52    	sub.b     w4, #0xf, [w15]
+ 47a:	f5 ff 36    	bra       LEU, 0x466 <.L16>
+
+0000047c <.LSM56>:
+        BD[EP0OUT].bytecount = MAX_PACKET_SIZE;
+ 47c:	04 c4 b3    	mov.b     #0x40, w4
+ 47e:	84 42 78    	mov.b     w4, w5
+ 480:	06 a0 20    	mov.w     #0xa00, w6
+ 482:	05 4b 78    	mov.b     w5, [w6]
+
+00000484 <.LSM57>:
+        BD[EP0OUT].address = EP0_OUT_buffer;    // EP0 OUT gets a buffer
+ 484:	04 80 20    	mov.w     #0x800, w4
+ 486:	14 50 88    	mov.w     w4, 0xa02
+
+00000488 <.LSM58>:
+        BD[EP0OUT].status = 0x88;               // set UOWN bit (USB can write)
+ 488:	84 c8 b3    	mov.b     #0x88, w4
+ 48a:	84 42 78    	mov.b     w4, w5
+ 48c:	16 a0 20    	mov.w     #0xa01, w6
+ 48e:	05 4b 78    	mov.b     w5, [w6]
+
+00000490 <.LSM59>:
+        BD[EP0IN].address = EP0_IN_buffer;      // EP0 IN gets a buffer
+ 490:	04 84 20    	mov.w     #0x840, w4
+ 492:	34 50 88    	mov.w     w4, 0xa06
+
+00000494 <.LSM60>:
+        BD[EP0IN].status = 0x08;                // clear UOWN bit (MCU can write)
+ 494:	84 c0 b3    	mov.b     #0x8, w4
+ 496:	84 42 78    	mov.b     w4, w5
+ 498:	56 a0 20    	mov.w     #0xa05, w6
+ 49a:	05 4b 78    	mov.b     w5, [w6]
+
+0000049c <.LSM61>:
+        U1ADDR = 0x00;                  // set USB Address to 0
+ 49c:	00 02 eb    	clr.w     w4
+ 49e:	b4 24 88    	mov.w     w4, 0x496
+
+000004a0 <.LSM62>:
+        U1IR = 0xFF;                    // clear all the USB interrupt flags
+ 4a0:	f4 0f 20    	mov.w     #0xff, w4
+ 4a2:	54 24 88    	mov.w     w4, 0x48a
+
+000004a4 <.LSM63>:
+        U1EP0 = ENDPT_CONTROL;          // EP0 is a control pipe and requires an ACK
+ 4a4:	d4 00 20    	mov.w     #0xd, w4
+ 4a6:	54 25 88    	mov.w     w4, 0x4aa
+
+000004a8 <.LSM64>:
+//      U1EIE = 0x00FF;                 // enable all USB error interrupts
+        USB_USWSTAT = DEFAULT_STATE;
+ 4a8:	14 c0 b3    	mov.b     #0x1, w4
+ 4aa:	84 42 78    	mov.b     w4, w5
+ 4ac:	c6 89 20    	mov.w     #0x89c, w6
+ 4ae:	05 4b 78    	mov.b     w5, [w6]
+
+000004b0 <.LSM65>:
+        USB_device_status = 0x01;       // self powered, remote wakeup disabled
+ 4b0:	14 c0 b3    	mov.b     #0x1, w4
+ 4b2:	84 42 78    	mov.b     w4, w5
+ 4b4:	a6 89 20    	mov.w     #0x89a, w6
+ 4b6:	05 4b 78    	mov.b     w5, [w6]
+ 4b8:	48 00 37    	bra       0x54a
+
+000004ba <.L12>:
+#ifdef SHOW_ENUM_STATUS
+        PORTB &= 0xE0;
+        PORTBbits.RB1 = 1;              // set bit 1 of PORTB to indicate Powered state
+#endif
+    } else if (U1IRbits.TRNIF) {
+ 4ba:	54 24 80    	mov.w     0x48a, w4
+ 4bc:	68 02 62    	and.w     w4, #0x8, w4
+ 4be:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ 4c0:	44 00 32    	bra       Z, 0x54a
+
+000004c2 <.LSM67>:
+        buf_desc_ptr = &BD[U1STAT>>3];  // ENDPT and DIR bits of U1STAT provide the offset into the buffer descriptor table
+ 4c2:	94 24 80    	mov.w     0x492, w4
+ 4c4:	43 22 de    	lsr.w     w4, #0x3, w4
+ 4c6:	c2 22 dd    	sl.w      w4, #0x2, w5
+ 4c8:	04 a0 20    	mov.w     #0xa00, w4
+ 4ca:	04 82 42    	add.w     w5, w4, w4
+ 4cc:	24 07 98    	mov.w     w4, [w14+4]
+
+000004ce <.LSM68>:
+        USB_buffer_desc.status = buf_desc_ptr->status;
+ 4ce:	2e 02 90    	mov.w     [w14+4], w4
+ 4d0:	14 42 90    	mov.b     [w4+1], w4
+ 4d2:	84 42 78    	mov.b     w4, w5
+ 4d4:	16 88 20    	mov.w     #0x881, w6
+ 4d6:	05 4b 78    	mov.b     w5, [w6]
+
+000004d8 <.LSM69>:
+        USB_buffer_desc.bytecount = buf_desc_ptr->bytecount;
+ 4d8:	2e 02 90    	mov.w     [w14+4], w4
+ 4da:	14 42 78    	mov.b     [w4], w4
+ 4dc:	84 42 78    	mov.b     w4, w5
+ 4de:	06 88 20    	mov.w     #0x880, w6
+ 4e0:	05 4b 78    	mov.b     w5, [w6]
+
+000004e2 <.LSM70>:
+        USB_buffer_desc.address = buf_desc_ptr->address;
+ 4e2:	2e 02 90    	mov.w     [w14+4], w4
+ 4e4:	14 02 90    	mov.w     [w4+2], w4
+ 4e6:	14 44 88    	mov.w     w4, 0x882
+
+000004e8 <.LSM71>:
+        USB_USTAT = U1STAT;             // save the USB status register
+ 4e8:	94 24 80    	mov.w     0x492, w4
+ 4ea:	04 42 78    	mov.b     w4, w4
+ 4ec:	84 42 78    	mov.b     w4, w5
+ 4ee:	b6 89 20    	mov.w     #0x89b, w6
+ 4f0:	05 4b 78    	mov.b     w5, [w6]
+
+000004f2 <.LSM72>:
+        U1IR = U1IR_TRNIF;              // clear TRNIF
+ 4f2:	84 00 20    	mov.w     #0x8, w4
+ 4f4:	54 24 88    	mov.w     w4, 0x48a
+
+000004f6 <.LSM73>:
+#ifdef SHOW_ENUM_STATUS
+        if (USB_USTAT&0xF0==EP0) {      // toggle RB5 to reflect EP0 activity
+            PORTB ^= 0x20;
+        }
+#endif
+        USB_error_flags = 0x00;         // clear USB error flags
+ 4f6:	00 42 eb    	clr.b     w4
+ 4f8:	84 42 78    	mov.b     w4, w5
+ 4fa:	86 89 20    	mov.w     #0x898, w6
+ 4fc:	05 4b 78    	mov.b     w5, [w6]
+
+000004fe <.LSM74>:
+        switch (USB_buffer_desc.status&0x3C) {    // extract PID bits
+ 4fe:	14 88 20    	mov.w     #0x881, w4
+ 500:	14 42 78    	mov.b     [w4], w4
+ 502:	84 82 fb    	ze        w4, w5
+ 504:	c4 03 20    	mov.w     #0x3c, w4
+ 506:	04 82 62    	and.w     w5, w4, w4
+ 508:	45 02 20    	mov.w     #0x24, w5
+ 50a:	85 0f 52    	sub.w     w4, w5, [w15]
+ 50c:	08 00 32    	bra       Z, 0x51e
+ 50e:	45 03 20    	mov.w     #0x34, w5
+ 510:	85 0f 52    	sub.w     w4, w5, [w15]
+ 512:	03 00 32    	bra       Z, 0x51a <.L20>
+ 514:	e4 0f 52    	sub.w     w4, #0x4, [w15]
+ 516:	05 00 32    	bra       Z, 0x522
+ 518:	05 00 37    	bra       0x524
+
+0000051a <.L20>:
+            case TOKEN_SETUP:
+                ProcessSetupToken();
+ 51a:	19 00 07    	rcall     0x54e <_ProcessSetupToken>
+
+0000051c <.LSM76>:
+                break;
+ 51c:	03 00 37    	bra       0x524
+
+0000051e <.L19>:
+            case TOKEN_IN:
+                ProcessInToken();
+ 51e:	5c 03 07    	rcall     0xbd8 <_ProcessInToken>
+
+00000520 <.LSM78>:
+                break;
+ 520:	01 00 37    	bra       0x524
+
+00000522 <.L18>:
+            case TOKEN_OUT:
+                ProcessOutToken();
+ 522:	93 03 07    	rcall     0xc4a <_ProcessOutToken>
+
+00000524 <.L17>:
+        }
+        if (USB_error_flags&0x01) {             // if there was a Request Error...
+ 524:	84 89 20    	mov.w     #0x898, w4
+ 526:	14 42 78    	mov.b     [w4], w4
+ 528:	04 82 fb    	ze        w4, w4
+ 52a:	61 02 62    	and.w     w4, #0x1, w4
+ 52c:	04 42 78    	mov.b     w4, w4
+ 52e:	e0 4f 52    	sub.b     w4, #0x0, [w15]
+ 530:	0c 00 32    	bra       Z, 0x54a
+
+00000532 <.LSM81>:
+            BD[EP0OUT].bytecount = MAX_PACKET_SIZE;   // ...get ready to receive the next Setup token...
+ 532:	04 c4 b3    	mov.b     #0x40, w4
+ 534:	84 42 78    	mov.b     w4, w5
+ 536:	06 a0 20    	mov.w     #0xa00, w6
+ 538:	05 4b 78    	mov.b     w5, [w6]
+
+0000053a <.LSM82>:
+            BD[EP0IN].status = 0x84;
+ 53a:	44 c8 b3    	mov.b     #0x84, w4
+ 53c:	84 42 78    	mov.b     w4, w5
+ 53e:	56 a0 20    	mov.w     #0xa05, w6
+ 540:	05 4b 78    	mov.b     w5, [w6]
+
+00000542 <.LSM83>:
+            BD[EP0OUT].status = 0x84;                 // ...and issue a protocol stall on EP0
+ 542:	44 c8 b3    	mov.b     #0x84, w4
+ 544:	84 42 78    	mov.b     w4, w5
+ 546:	16 a0 20    	mov.w     #0xa01, w6
+ 548:	05 4b 78    	mov.b     w5, [w6]
+
+0000054a <.L5>:
+        }
+    }
+}
+ 54a:	00 80 fa    	ulnk      
+ 54c:	00 00 06    	return    
+
+0000054e <_ProcessSetupToken>:
+
+void ProcessSetupToken(void) {
+ 54e:	02 00 fa    	lnk       #0x2
+
+00000550 <.LSM86>:
+    BYTE *buf_ptr;
+
+    buf_ptr = USB_buffer_desc.address;
+ 550:	14 44 80    	mov.w     0x882, w4
+ 552:	04 0f 78    	mov.w     w4, [w14]
+
+00000554 <.LSM87>:
+    USB_setup.bmRequestType = *buf_ptr++;   // copy the setup packet received from the host
+ 554:	1e 02 78    	mov.w     [w14], w4
+ 556:	94 42 78    	mov.b     [w4], w5
+ 558:	44 88 20    	mov.w     #0x884, w4
+ 55a:	05 4a 78    	mov.b     w5, [w4]
+ 55c:	1e 0f e8    	inc.w     [w14], [w14]
+
+0000055e <.LSM88>:
+    USB_setup.bRequest = *buf_ptr++;
+ 55e:	1e 02 78    	mov.w     [w14], w4
+ 560:	94 42 78    	mov.b     [w4], w5
+ 562:	44 88 20    	mov.w     #0x884, w4
+ 564:	15 42 98    	mov.b     w5, [w4+1]
+ 566:	1e 0f e8    	inc.w     [w14], [w14]
+
+00000568 <.LSM89>:
+    USB_setup.wValue.b[0] = *buf_ptr++;
+ 568:	1e 02 78    	mov.w     [w14], w4
+ 56a:	94 42 78    	mov.b     [w4], w5
+ 56c:	44 88 20    	mov.w     #0x884, w4
+ 56e:	25 42 98    	mov.b     w5, [w4+2]
+ 570:	1e 0f e8    	inc.w     [w14], [w14]
+
+00000572 <.LSM90>:
+    USB_setup.wValue.b[1] = *buf_ptr++;
+ 572:	1e 02 78    	mov.w     [w14], w4
+ 574:	94 42 78    	mov.b     [w4], w5
+ 576:	44 88 20    	mov.w     #0x884, w4
+ 578:	35 42 98    	mov.b     w5, [w4+3]
+ 57a:	1e 0f e8    	inc.w     [w14], [w14]
+
+0000057c <.LSM91>:
+    USB_setup.wIndex.b[0] = *buf_ptr++;
+ 57c:	1e 02 78    	mov.w     [w14], w4
+ 57e:	94 42 78    	mov.b     [w4], w5
+ 580:	44 88 20    	mov.w     #0x884, w4
+ 582:	45 42 98    	mov.b     w5, [w4+4]
+ 584:	1e 0f e8    	inc.w     [w14], [w14]
+
+00000586 <.LSM92>:
+    USB_setup.wIndex.b[1] = *buf_ptr++;
+ 586:	1e 02 78    	mov.w     [w14], w4
+ 588:	94 42 78    	mov.b     [w4], w5
+ 58a:	44 88 20    	mov.w     #0x884, w4
+ 58c:	55 42 98    	mov.b     w5, [w4+5]
+ 58e:	1e 0f e8    	inc.w     [w14], [w14]
+
+00000590 <.LSM93>:
+    USB_setup.wLength.b[0] = *buf_ptr++;
+ 590:	1e 02 78    	mov.w     [w14], w4
+ 592:	94 42 78    	mov.b     [w4], w5
+ 594:	44 88 20    	mov.w     #0x884, w4
+ 596:	65 42 98    	mov.b     w5, [w4+6]
+ 598:	1e 0f e8    	inc.w     [w14], [w14]
+
+0000059a <.LSM94>:
+    USB_setup.wLength.b[1] = *buf_ptr++;
+ 59a:	1e 02 78    	mov.w     [w14], w4
+ 59c:	94 42 78    	mov.b     [w4], w5
+ 59e:	44 88 20    	mov.w     #0x884, w4
+ 5a0:	75 42 98    	mov.b     w5, [w4+7]
+ 5a2:	1e 0f e8    	inc.w     [w14], [w14]
+
+000005a4 <.LSM95>:
+    BD[EP0OUT].bytecount = MAX_PACKET_SIZE;     // reset the EP0 OUT byte count
+ 5a4:	04 c4 b3    	mov.b     #0x40, w4
+ 5a6:	04 43 78    	mov.b     w4, w6
+ 5a8:	05 a0 20    	mov.w     #0xa00, w5
+ 5aa:	86 4a 78    	mov.b     w6, [w5]
+
+000005ac <.LSM96>:
+    BD[EP0IN].status = 0x08;                   // return the EP0 IN buffer to us (dequeue any pending requests)
+ 5ac:	84 c0 b3    	mov.b     #0x8, w4
+ 5ae:	04 43 78    	mov.b     w4, w6
+ 5b0:	55 a0 20    	mov.w     #0xa05, w5
+ 5b2:	86 4a 78    	mov.b     w6, [w5]
+
+000005b4 <.LSM97>:
+    BD[EP0OUT].status = (!(USB_setup.bmRequestType&0x80) && (USB_setup.wLength.w)) ? 0xC8:0x88;    // set EP0 OUT UOWN back to USB and DATA0/DATA1 packet according to the request type
+ 5b4:	44 88 20    	mov.w     #0x884, w4
+ 5b6:	14 42 78    	mov.b     [w4], w4
+ 5b8:	e0 4f 52    	sub.b     w4, #0x0, [w15]
+ 5ba:	06 00 35    	bra       LT, 0x5c8
+ 5bc:	44 88 20    	mov.w     #0x884, w4
+ 5be:	34 02 90    	mov.w     [w4+6], w4
+ 5c0:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ 5c2:	02 00 32    	bra       Z, 0x5c8
+ 5c4:	84 cc b3    	mov.b     #0xc8, w4
+ 5c6:	01 00 37    	bra       0x5ca
+
+000005c8 <.L22>:
+ 5c8:	84 c8 b3    	mov.b     #0x88, w4
+
+000005ca <.L23>:
+ 5ca:	04 43 78    	mov.b     w4, w6
+ 5cc:	15 a0 20    	mov.w     #0xa01, w5
+ 5ce:	86 4a 78    	mov.b     w6, [w5]
+
+000005d0 <.LSM98>:
+    U1CONbits.PKTDIS = 0;                 // assuming there is nothing to dequeue, clear the packet disable bit
+ 5d0:	94 a4 a9    	bclr.b    0x494, #0x5
+
+000005d2 <.LSM99>:
+    USB_request.setup.bmRequestType = NO_REQUEST;   // clear the device request in process
+ 5d2:	00 c2 eb    	setm.b    w4
+ 5d4:	04 43 78    	mov.b     w4, w6
+ 5d6:	c5 88 20    	mov.w     #0x88c, w5
+ 5d8:	86 4a 78    	mov.b     w6, [w5]
+
+000005da <.LSM100>:
+    USB_request.setup.bRequest = NO_REQUEST;
+ 5da:	00 c2 eb    	setm.b    w4
+ 5dc:	04 43 78    	mov.b     w4, w6
+ 5de:	d5 88 20    	mov.w     #0x88d, w5
+ 5e0:	86 4a 78    	mov.b     w6, [w5]
+
+000005e2 <.LSM101>:
+    switch (USB_setup.bmRequestType&0x60) {    // extract request type bits
+ 5e2:	44 88 20    	mov.w     #0x884, w4
+ 5e4:	14 42 78    	mov.b     [w4], w4
+ 5e6:	84 82 fb    	ze        w4, w5
+ 5e8:	04 06 20    	mov.w     #0x60, w4
+ 5ea:	04 82 62    	and.w     w5, w4, w4
+ 5ec:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ 5ee:	04 00 32    	bra       Z, 0x5f8 <.L25>
+ 5f0:	05 04 20    	mov.w     #0x40, w5
+ 5f2:	85 0f 52    	sub.w     w4, w5, [w15]
+ 5f4:	03 00 32    	bra       Z, 0x5fc <.L26>
+ 5f6:	04 00 37    	bra       0x600
+
+000005f8 <.L25>:
+        case STANDARD_REQ:
+            StandardRequests();
+ 5f8:	0b 00 07    	rcall     0x610
+
+000005fa <.LSM103>:
+            break;
+ 5fa:	08 00 37    	bra       0x60c
+
+000005fc <.L26>:
+        case VENDOR_REQ:
+            VendorRequests();
+ 5fc:	89 03 07    	rcall     0xd10 <_VendorRequests>
+
+000005fe <.LSM105>:
+            break;
+ 5fe:	06 00 37    	bra       0x60c
+
+00000600 <.L28>:
+        case CLASS_REQ:
+//            ClassRequests();
+//            break;
+        default:
+            USB_error_flags |= 0x01;    // set Request Error Flag
+ 600:	84 89 20    	mov.w     #0x898, w4
+ 602:	14 42 78    	mov.b     [w4], w4
+ 604:	04 04 a0    	bset.b    w4, #0x0
+ 606:	04 43 78    	mov.b     w4, w6
+ 608:	85 89 20    	mov.w     #0x898, w5
+ 60a:	86 4a 78    	mov.b     w6, [w5]
+
+0000060c <.L21>:
+    }
+}
+ 60c:	00 80 fa    	ulnk      
+ 60e:	00 00 06    	return    
+
+00000610 <_StandardRequests>:
+
+void StandardRequests(void) {
+ 610:	06 00 fa    	lnk       #0x6
+
+00000612 <.LSM109>:
+    BUFDESC *buf_desc_ptr;
+    unsigned int *U1EP;
+    BYTE n;
+
+    switch (USB_setup.bRequest) {
+ 612:	44 88 20    	mov.w     #0x884, w4
+ 614:	14 42 90    	mov.b     [w4+1], w4
+ 616:	04 82 fb    	ze        w4, w4
+ 618:	cf a2 de    	asr.w     w4, #0xf, w5
+ 61a:	b6 00 20    	mov.w     #0xb, w6
+ 61c:	07 00 20    	mov.w     #0x0, w7
+ 61e:	86 0f 52    	sub.w     w4, w6, [w15]
+ 620:	87 8f 5a    	subb.w    w5, w7, [w15]
+ 622:	d2 02 3e    	bra       GTU, 0xbc8 <.L30>
+ 624:	04 60 01    	bra       w4
+ 626:	0b 00 37    	bra       0x63e <.L31>
+ 628:	d1 00 37    	bra       0x7cc <.L32>
+ 62a:	ce 02 37    	bra       0xbc8 <.L30>
+ 62c:	cf 00 37    	bra       0x7cc <.L32>
+ 62e:	cc 02 37    	bra       0xbc8 <.L30>
+ 630:	85 01 37    	bra       0x93c <.L33>
+ 632:	ab 01 37    	bra       0x98a <.L34>
+ 634:	c9 02 37    	bra       0xbc8 <.L30>
+ 636:	33 02 37    	bra       0xa9e <.L35>
+ 638:	3f 02 37    	bra       0xab8 <.L36>
+ 63a:	75 02 37    	bra       0xb26 <.L37>
+ 63c:	98 02 37    	bra       0xb6e <.L38>
+
+0000063e <.L31>:
+        case GET_STATUS:
+            switch (USB_setup.bmRequestType&0x1F) { // extract request recipient bits
+ 63e:	44 88 20    	mov.w     #0x884, w4
+ 640:	14 42 78    	mov.b     [w4], w4
+ 642:	04 82 fb    	ze        w4, w4
+ 644:	7f 02 62    	and.w     w4, #0x1f, w4
+ 646:	e1 0f 52    	sub.w     w4, #0x1, [w15]
+ 648:	15 00 32    	bra       Z, 0x674
+ 64a:	e2 0f 52    	sub.w     w4, #0x2, [w15]
+ 64c:	3d 00 32    	bra       Z, 0x6c8
+ 64e:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ 650:	b5 00 3a    	bra       NZ, 0x7bc <.L126>
+
+00000652 <.LSM111>:
+                case RECIPIENT_DEVICE:
+                    BD[EP0IN].address[0] = USB_device_status;
+ 652:	34 50 80    	mov.w     0xa06, w4
+ 654:	a5 89 20    	mov.w     #0x89a, w5
+ 656:	95 42 78    	mov.b     [w5], w5
+ 658:	05 4a 78    	mov.b     w5, [w4]
+
+0000065a <.LSM112>:
+                    BD[EP0IN].address[1] = 0x00;
+ 65a:	34 50 80    	mov.w     0xa06, w4
+ 65c:	04 02 e8    	inc.w     w4, w4
+ 65e:	80 42 eb    	clr.b     w5
+ 660:	05 4a 78    	mov.b     w5, [w4]
+
+00000662 <.LSM113>:
+                    BD[EP0IN].bytecount = 0x02;
+ 662:	24 c0 b3    	mov.b     #0x2, w4
+ 664:	04 43 78    	mov.b     w4, w6
+ 666:	45 a0 20    	mov.w     #0xa04, w5
+ 668:	86 4a 78    	mov.b     w6, [w5]
+
+0000066a <.LSM114>:
+                    BD[EP0IN].status = 0xC8;                     // send packet as DATA1, set UOWN bit
+ 66a:	84 cc b3    	mov.b     #0xc8, w4
+ 66c:	04 43 78    	mov.b     w4, w6
+ 66e:	55 a0 20    	mov.w     #0xa05, w5
+ 670:	86 4a 78    	mov.b     w6, [w5]
+
+00000672 <.LSM115>:
+                    break;
+ 672:	ab 00 37    	bra       0x7ca <.L44>
+
+00000674 <.L42>:
+                case RECIPIENT_INTERFACE:
+                    switch (USB_USWSTAT) {
+ 674:	c4 89 20    	mov.w     #0x89c, w4
+ 676:	14 42 78    	mov.b     [w4], w4
+ 678:	04 82 fb    	ze        w4, w4
+ 67a:	e2 0f 52    	sub.w     w4, #0x2, [w15]
+ 67c:	03 00 32    	bra       Z, 0x684
+ 67e:	e3 0f 52    	sub.w     w4, #0x3, [w15]
+ 680:	08 00 32    	bra       Z, 0x692
+ 682:	21 00 37    	bra       0x6c6
+
+00000684 <.L46>:
+                        case ADDRESS_STATE:
+                            USB_error_flags |= 0x01;        // set Request Error Flag
+ 684:	84 89 20    	mov.w     #0x898, w4
+ 686:	14 42 78    	mov.b     [w4], w4
+ 688:	04 04 a0    	bset.b    w4, #0x0
+ 68a:	04 43 78    	mov.b     w4, w6
+ 68c:	85 89 20    	mov.w     #0x898, w5
+ 68e:	86 4a 78    	mov.b     w6, [w5]
+
+00000690 <.LSM118>:
+                            break;
+ 690:	1a 00 37    	bra       0x6c6
+
+00000692 <.L47>:
+                        case CONFIG_STATE:
+                            if (USB_setup.wIndex.b[0]<NUM_INTERFACES) {
+ 692:	44 88 20    	mov.w     #0x884, w4
+ 694:	44 42 90    	mov.b     [w4+4], w4
+ 696:	e0 4f 52    	sub.b     w4, #0x0, [w15]
+ 698:	10 00 3a    	bra       NZ, 0x6ba <.L48>
+
+0000069a <.LSM120>:
+                                BD[EP0IN].address[0] = 0x00;
+ 69a:	34 50 80    	mov.w     0xa06, w4
+ 69c:	80 42 eb    	clr.b     w5
+ 69e:	05 4a 78    	mov.b     w5, [w4]
+
+000006a0 <.LSM121>:
+                                BD[EP0IN].address[1] = 0x00;
+ 6a0:	34 50 80    	mov.w     0xa06, w4
+ 6a2:	04 02 e8    	inc.w     w4, w4
+ 6a4:	80 42 eb    	clr.b     w5
+ 6a6:	05 4a 78    	mov.b     w5, [w4]
+
+000006a8 <.LSM122>:
+                                BD[EP0IN].bytecount = 0x02;
+ 6a8:	24 c0 b3    	mov.b     #0x2, w4
+ 6aa:	04 43 78    	mov.b     w4, w6
+ 6ac:	45 a0 20    	mov.w     #0xa04, w5
+ 6ae:	86 4a 78    	mov.b     w6, [w5]
+
+000006b0 <.LSM123>:
+                                BD[EP0IN].status = 0xC8;         // send packet as DATA1, set UOWN bit
+ 6b0:	84 cc b3    	mov.b     #0xc8, w4
+ 6b2:	04 43 78    	mov.b     w4, w6
+ 6b4:	55 a0 20    	mov.w     #0xa05, w5
+ 6b6:	86 4a 78    	mov.b     w6, [w5]
+ 6b8:	06 00 37    	bra       0x6c6
+
+000006ba <.L48>:
+                            } else {
+                                USB_error_flags |= 0x01;    // set Request Error Flag
+ 6ba:	84 89 20    	mov.w     #0x898, w4
+ 6bc:	14 42 78    	mov.b     [w4], w4
+ 6be:	04 04 a0    	bset.b    w4, #0x0
+ 6c0:	04 43 78    	mov.b     w4, w6
+ 6c2:	85 89 20    	mov.w     #0x898, w5
+ 6c4:	86 4a 78    	mov.b     w6, [w5]
+
+000006c6 <.L45>:
+                            }
+                    }
+                    break;
+ 6c6:	81 00 37    	bra       0x7ca <.L44>
+
+000006c8 <.L43>:
+                case RECIPIENT_ENDPOINT:
+                    switch (USB_USWSTAT) {
+ 6c8:	c4 89 20    	mov.w     #0x89c, w4
+ 6ca:	14 42 78    	mov.b     [w4], w4
+ 6cc:	04 82 fb    	ze        w4, w4
+ 6ce:	e2 0f 52    	sub.w     w4, #0x2, [w15]
+ 6d0:	03 00 32    	bra       Z, 0x6d8
+ 6d2:	e3 0f 52    	sub.w     w4, #0x3, [w15]
+ 6d4:	2e 00 32    	bra       Z, 0x732 <.L51>
+ 6d6:	6b 00 37    	bra       0x7ae <.L127>
+
+000006d8 <.L50>:
+                        case ADDRESS_STATE:
+                            if (!(USB_setup.wIndex.b[0]&0x0F)) {    // get EP, strip off direction bit and see if it is EP0
+ 6d8:	44 88 20    	mov.w     #0x884, w4
+ 6da:	44 42 90    	mov.b     [w4+4], w4
+ 6dc:	04 82 fb    	ze        w4, w4
+ 6de:	6f 02 62    	and.w     w4, #0xf, w4
+ 6e0:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ 6e2:	20 00 3a    	bra       NZ, 0x724 <.L52>
+
+000006e4 <.LSM128>:
+                                BD[EP0IN].address[0] = (((USB_setup.wIndex.b[0]&0x80) ? BD[EP0IN].status:BD[EP0OUT].status)&0x04)>>2;    // return the BSTALL bit of EP0 IN or OUT, whichever was requested
+ 6e4:	35 50 80    	mov.w     0xa06, w5
+ 6e6:	44 88 20    	mov.w     #0x884, w4
+ 6e8:	44 42 90    	mov.b     [w4+4], w4
+ 6ea:	e0 4f 52    	sub.b     w4, #0x0, [w15]
+ 6ec:	07 00 3d    	bra       GE, 0x6fc <.L53>
+ 6ee:	54 a0 20    	mov.w     #0xa05, w4
+ 6f0:	14 42 78    	mov.b     [w4], w4
+ 6f2:	04 82 fb    	ze        w4, w4
+ 6f4:	64 02 62    	and.w     w4, #0x4, w4
+ 6f6:	42 a2 de    	asr.w     w4, #0x2, w4
+ 6f8:	04 42 78    	mov.b     w4, w4
+ 6fa:	06 00 37    	bra       0x708 <.L54>
+
+000006fc <.L53>:
+ 6fc:	14 a0 20    	mov.w     #0xa01, w4
+ 6fe:	14 42 78    	mov.b     [w4], w4
+ 700:	04 82 fb    	ze        w4, w4
+ 702:	64 02 62    	and.w     w4, #0x4, w4
+ 704:	42 a2 de    	asr.w     w4, #0x2, w4
+ 706:	04 42 78    	mov.b     w4, w4
+
+00000708 <.L54>:
+ 708:	84 4a 78    	mov.b     w4, [w5]
+
+0000070a <.LSM129>:
+                                BD[EP0IN].address[1] = 0x00;
+ 70a:	34 50 80    	mov.w     0xa06, w4
+ 70c:	04 02 e8    	inc.w     w4, w4
+ 70e:	80 42 eb    	clr.b     w5
+ 710:	05 4a 78    	mov.b     w5, [w4]
+
+00000712 <.LSM130>:
+                                BD[EP0IN].bytecount = 0x02;
+ 712:	24 c0 b3    	mov.b     #0x2, w4
+ 714:	04 43 78    	mov.b     w4, w6
+ 716:	45 a0 20    	mov.w     #0xa04, w5
+ 718:	86 4a 78    	mov.b     w6, [w5]
+
+0000071a <.LSM131>:
+                                BD[EP0IN].status = 0xC8;         // send packet as DATA1, set UOWN bit
+ 71a:	84 cc b3    	mov.b     #0xc8, w4
+ 71c:	04 43 78    	mov.b     w4, w6
+ 71e:	55 a0 20    	mov.w     #0xa05, w5
+ 720:	86 4a 78    	mov.b     w6, [w5]
+ 722:	06 00 37    	bra       0x730 <.L55>
+
+00000724 <.L52>:
+                            } else {
+                                USB_error_flags |= 0x01;    // set Request Error Flag
+ 724:	84 89 20    	mov.w     #0x898, w4
+ 726:	14 42 78    	mov.b     [w4], w4
+ 728:	04 04 a0    	bset.b    w4, #0x0
+ 72a:	04 43 78    	mov.b     w4, w6
+ 72c:	85 89 20    	mov.w     #0x898, w5
+ 72e:	86 4a 78    	mov.b     w6, [w5]
+
+00000730 <.L55>:
+                            }
+                            break;
+ 730:	44 00 37    	bra       0x7ba <.L56>
+
+00000732 <.L51>:
+                        case CONFIG_STATE:
+                            U1EP = (unsigned int *)&U1EP0;
+ 732:	a4 4a 20    	mov.w     #0x4aa, w4
+ 734:	14 07 98    	mov.w     w4, [w14+2]
+
+00000736 <.LSM135>:
+                            n = USB_setup.wIndex.b[0]&0x0F;    // get EP and strip off direction bit for offset from U1EP0
+ 736:	44 88 20    	mov.w     #0x884, w4
+ 738:	44 42 90    	mov.b     [w4+4], w4
+ 73a:	6f 4f 62    	and.b     w4, #0xf, [w14]
+
+0000073c <.LSM136>:
+                            buf_desc_ptr = &BD[EP0OUT]+((n<<1)|((USB_setup.wIndex.b[0]&0x80) ? 0x01:0x00));    // compute pointer to the buffer descriptor for the specified EP
+ 73c:	9e 42 78    	mov.b     [w14], w5
+ 73e:	05 82 fb    	ze        w5, w4
+ 740:	04 02 42    	add.w     w4, w4, w4
+ 742:	84 02 78    	mov.w     w4, w5
+ 744:	44 88 20    	mov.w     #0x884, w4
+ 746:	44 42 90    	mov.b     [w4+4], w4
+ 748:	04 02 fb    	se        w4, w4
+ 74a:	4f 22 de    	lsr.w     w4, #0xf, w4
+ 74c:	05 02 72    	ior.w     w4, w5, w4
+ 74e:	c2 22 dd    	sl.w      w4, #0x2, w5
+ 750:	04 a0 20    	mov.w     #0xa00, w4
+ 752:	04 82 42    	add.w     w5, w4, w4
+ 754:	24 07 98    	mov.w     w4, [w14+4]
+
+00000756 <.LSM137>:
+                            if (U1EP[n]&((USB_setup.wIndex.b[0]&0x80) ? 0x04:0x08)) { // if the specified EP is enabled for transfers in the specified direction...
+ 756:	1e 43 78    	mov.b     [w14], w6
+ 758:	06 82 fb    	ze        w6, w4
+ 75a:	04 02 42    	add.w     w4, w4, w4
+ 75c:	9e 02 90    	mov.w     [w14+2], w5
+ 75e:	04 82 42    	add.w     w5, w4, w4
+ 760:	94 02 78    	mov.w     [w4], w5
+ 762:	44 88 20    	mov.w     #0x884, w4
+ 764:	44 42 90    	mov.b     [w4+4], w4
+ 766:	e0 4f 52    	sub.b     w4, #0x0, [w15]
+ 768:	02 00 3d    	bra       GE, 0x76e <.L57>
+ 76a:	44 00 20    	mov.w     #0x4, w4
+ 76c:	01 00 37    	bra       0x770
+
+0000076e <.L57>:
+ 76e:	84 00 20    	mov.w     #0x8, w4
+
+00000770 <.L58>:
+ 770:	04 82 62    	and.w     w5, w4, w4
+ 772:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ 774:	15 00 32    	bra       Z, 0x7a0 <.L59>
+
+00000776 <.LSM138>:
+                                BD[EP0IN].address[0] = ((buf_desc_ptr->status)&0x04)>>2;    // ...return the BSTALL bit of the specified EP
+ 776:	34 50 80    	mov.w     0xa06, w4
+ 778:	ae 02 90    	mov.w     [w14+4], w5
+ 77a:	95 42 90    	mov.b     [w5+1], w5
+ 77c:	85 82 fb    	ze        w5, w5
+ 77e:	e4 82 62    	and.w     w5, #0x4, w5
+ 780:	c2 aa de    	asr.w     w5, #0x2, w5
+ 782:	85 42 78    	mov.b     w5, w5
+ 784:	05 4a 78    	mov.b     w5, [w4]
+
+00000786 <.LSM139>:
+                                BD[EP0IN].address[1] = 0x00;
+ 786:	34 50 80    	mov.w     0xa06, w4
+ 788:	04 02 e8    	inc.w     w4, w4
+ 78a:	80 42 eb    	clr.b     w5
+ 78c:	05 4a 78    	mov.b     w5, [w4]
+
+0000078e <.LSM140>:
+                                BD[EP0IN].bytecount = 0x02;
+ 78e:	24 c0 b3    	mov.b     #0x2, w4
+ 790:	04 43 78    	mov.b     w4, w6
+ 792:	45 a0 20    	mov.w     #0xa04, w5
+ 794:	86 4a 78    	mov.b     w6, [w5]
+
+00000796 <.LSM141>:
+                                BD[EP0IN].status = 0xC8;         // send packet as DATA1, set UOWN bit
+ 796:	84 cc b3    	mov.b     #0xc8, w4
+ 798:	04 43 78    	mov.b     w4, w6
+ 79a:	55 a0 20    	mov.w     #0xa05, w5
+ 79c:	86 4a 78    	mov.b     w6, [w5]
+ 79e:	06 00 37    	bra       0x7ac <.L60>
+
+000007a0 <.L59>:
+                            } else {
+                                USB_error_flags |= 0x01;    // set Request Error Flag
+ 7a0:	84 89 20    	mov.w     #0x898, w4
+ 7a2:	14 42 78    	mov.b     [w4], w4
+ 7a4:	04 04 a0    	bset.b    w4, #0x0
+ 7a6:	04 43 78    	mov.b     w4, w6
+ 7a8:	85 89 20    	mov.w     #0x898, w5
+ 7aa:	86 4a 78    	mov.b     w6, [w5]
+
+000007ac <.L60>:
+                            }
+                            break;
+ 7ac:	06 00 37    	bra       0x7ba <.L56>
+
+000007ae <.L127>:
+                        default:
+                            USB_error_flags |= 0x01;        // set Request Error Flag
+ 7ae:	84 89 20    	mov.w     #0x898, w4
+ 7b0:	14 42 78    	mov.b     [w4], w4
+ 7b2:	04 04 a0    	bset.b    w4, #0x0
+ 7b4:	04 43 78    	mov.b     w4, w6
+ 7b6:	85 89 20    	mov.w     #0x898, w5
+ 7b8:	86 4a 78    	mov.b     w6, [w5]
+
+000007ba <.L56>:
+                    }
+                    break;
+ 7ba:	07 00 37    	bra       0x7ca <.L44>
+
+000007bc <.L126>:
+                default:
+                    USB_error_flags |= 0x01;                // set Request Error Flag
+ 7bc:	84 89 20    	mov.w     #0x898, w4
+ 7be:	14 42 78    	mov.b     [w4], w4
+ 7c0:	04 04 a0    	bset.b    w4, #0x0
+ 7c2:	04 43 78    	mov.b     w4, w6
+ 7c4:	85 89 20    	mov.w     #0x898, w5
+ 7c6:	86 4a 78    	mov.b     w6, [w5]
+
+000007c8 <.LSM147>:
+            }
+            break;
+ 7c8:	05 02 37    	bra       0xbd4 <.L29>
+
+000007ca <.L44>:
+ 7ca:	04 02 37    	bra       0xbd4 <.L29>
+
+000007cc <.L32>:
+        case CLEAR_FEATURE:
+        case SET_FEATURE:
+            switch (USB_setup.bmRequestType&0x1F) {         // extract request recipient bits
+ 7cc:	44 88 20    	mov.w     #0x884, w4
+ 7ce:	14 42 78    	mov.b     [w4], w4
+ 7d0:	04 82 fb    	ze        w4, w4
+ 7d2:	7f 02 62    	and.w     w4, #0x1f, w4
+ 7d4:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ 7d6:	03 00 32    	bra       Z, 0x7de <.L63>
+ 7d8:	e2 0f 52    	sub.w     w4, #0x2, [w15]
+ 7da:	28 00 32    	bra       Z, 0x82c <.L64>
+ 7dc:	a7 00 37    	bra       0x92c <.L128>
+
+000007de <.L63>:
+                case RECIPIENT_DEVICE:
+                    switch (USB_setup.wValue.b[0]) {
+ 7de:	44 88 20    	mov.w     #0x884, w4
+ 7e0:	24 42 90    	mov.b     [w4+2], w4
+ 7e2:	04 82 fb    	ze        w4, w4
+ 7e4:	e1 0f 52    	sub.w     w4, #0x1, [w15]
+ 7e6:	1b 00 3a    	bra       NZ, 0x81e <.L129>
+
+000007e8 <.LSM150>:
+                        case DEVICE_REMOTE_WAKEUP:
+                            if (USB_setup.bRequest==CLEAR_FEATURE)
+ 7e8:	44 88 20    	mov.w     #0x884, w4
+ 7ea:	14 42 90    	mov.b     [w4+1], w4
+ 7ec:	e1 4f 52    	sub.b     w4, #0x1, [w15]
+ 7ee:	08 00 3a    	bra       NZ, 0x800
+
+000007f0 <.LSM151>:
+                                USB_device_status &= 0xFE;
+ 7f0:	a5 89 20    	mov.w     #0x89a, w5
+ 7f2:	95 42 78    	mov.b     [w5], w5
+ 7f4:	e4 cf b3    	mov.b     #0xfe, w4
+ 7f6:	04 c2 62    	and.b     w5, w4, w4
+ 7f8:	04 43 78    	mov.b     w4, w6
+ 7fa:	a5 89 20    	mov.w     #0x89a, w5
+ 7fc:	86 4a 78    	mov.b     w6, [w5]
+ 7fe:	06 00 37    	bra       0x80c <.L68>
+
+00000800 <.L67>:
+                            else
+                                USB_device_status |= 0x01;
+ 800:	a4 89 20    	mov.w     #0x89a, w4
+ 802:	14 42 78    	mov.b     [w4], w4
+ 804:	04 04 a0    	bset.b    w4, #0x0
+ 806:	04 43 78    	mov.b     w4, w6
+ 808:	a5 89 20    	mov.w     #0x89a, w5
+ 80a:	86 4a 78    	mov.b     w6, [w5]
+
+0000080c <.L68>:
+                            BD[EP0IN].bytecount = 0x00;          // set EP0 IN byte count to 0
+ 80c:	00 42 eb    	clr.b     w4
+ 80e:	04 43 78    	mov.b     w4, w6
+ 810:	45 a0 20    	mov.w     #0xa04, w5
+ 812:	86 4a 78    	mov.b     w6, [w5]
+
+00000814 <.LSM154>:
+                            BD[EP0IN].status = 0xC8;             // send packet as DATA1, set UOWN bit
+ 814:	84 cc b3    	mov.b     #0xc8, w4
+ 816:	04 43 78    	mov.b     w4, w6
+ 818:	55 a0 20    	mov.w     #0xa05, w5
+ 81a:	86 4a 78    	mov.b     w6, [w5]
+
+0000081c <.LSM155>:
+                            break;
+ 81c:	06 00 37    	bra       0x82a <.L69>
+
+0000081e <.L129>:
+                        default:
+                            USB_error_flags |= 0x01;        // set Request Error Flag
+ 81e:	84 89 20    	mov.w     #0x898, w4
+ 820:	14 42 78    	mov.b     [w4], w4
+ 822:	04 04 a0    	bset.b    w4, #0x0
+ 824:	04 43 78    	mov.b     w4, w6
+ 826:	85 89 20    	mov.w     #0x898, w5
+ 828:	86 4a 78    	mov.b     w6, [w5]
+
+0000082a <.L69>:
+                    }
+                    break;
+ 82a:	87 00 37    	bra       0x93a <.L70>
+
+0000082c <.L64>:
+                case RECIPIENT_ENDPOINT:
+                    switch (USB_USWSTAT) {
+ 82c:	c4 89 20    	mov.w     #0x89c, w4
+ 82e:	14 42 78    	mov.b     [w4], w4
+ 830:	04 82 fb    	ze        w4, w4
+ 832:	e2 0f 52    	sub.w     w4, #0x2, [w15]
+ 834:	03 00 32    	bra       Z, 0x83c <.L72>
+ 836:	e3 0f 52    	sub.w     w4, #0x3, [w15]
+ 838:	17 00 32    	bra       Z, 0x868 <.L73>
+ 83a:	71 00 37    	bra       0x91e <.L130>
+
+0000083c <.L72>:
+                        case ADDRESS_STATE:
+                            if (!(USB_setup.wIndex.b[0]&0x0F)) {    // get EP, strip off direction bit, and see if its EP0
+ 83c:	44 88 20    	mov.w     #0x884, w4
+ 83e:	44 42 90    	mov.b     [w4+4], w4
+ 840:	04 82 fb    	ze        w4, w4
+ 842:	6f 02 62    	and.w     w4, #0xf, w4
+ 844:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ 846:	09 00 3a    	bra       NZ, 0x85a <.L74>
+
+00000848 <.LSM160>:
+                                BD[EP0IN].bytecount = 0x00;      // set EP0 IN byte count to 0
+ 848:	00 42 eb    	clr.b     w4
+ 84a:	04 43 78    	mov.b     w4, w6
+ 84c:	45 a0 20    	mov.w     #0xa04, w5
+ 84e:	86 4a 78    	mov.b     w6, [w5]
+
+00000850 <.LSM161>:
+                                BD[EP0IN].status = 0xC8;         // send packet as DATA1, set UOWN bit
+ 850:	84 cc b3    	mov.b     #0xc8, w4
+ 852:	04 43 78    	mov.b     w4, w6
+ 854:	55 a0 20    	mov.w     #0xa05, w5
+ 856:	86 4a 78    	mov.b     w6, [w5]
+ 858:	06 00 37    	bra       0x866 <.L75>
+
+0000085a <.L74>:
+                            } else {
+                                USB_error_flags |= 0x01;    // set Request Error Flag
+ 85a:	84 89 20    	mov.w     #0x898, w4
+ 85c:	14 42 78    	mov.b     [w4], w4
+ 85e:	04 04 a0    	bset.b    w4, #0x0
+ 860:	04 43 78    	mov.b     w4, w6
+ 862:	85 89 20    	mov.w     #0x898, w5
+ 864:	86 4a 78    	mov.b     w6, [w5]
+
+00000866 <.L75>:
+                            }
+                            break;
+ 866:	61 00 37    	bra       0x92a <.L76>
+
+00000868 <.L73>:
+                        case CONFIG_STATE:
+                            U1EP = (unsigned int *)&U1EP0;
+ 868:	a4 4a 20    	mov.w     #0x4aa, w4
+ 86a:	14 07 98    	mov.w     w4, [w14+2]
+
+0000086c <.LSM165>:
+                            if (n = USB_setup.wIndex.b[0]&0x0F) {    // get EP and strip off direction bit for offset from U1EP0, if not EP0...
+ 86c:	44 88 20    	mov.w     #0x884, w4
+ 86e:	44 42 90    	mov.b     [w4+4], w4
+ 870:	6f 4f 62    	and.b     w4, #0xf, [w14]
+ 872:	1e 42 78    	mov.b     [w14], w4
+ 874:	e0 4f 52    	sub.b     w4, #0x0, [w15]
+ 876:	44 00 32    	bra       Z, 0x900 <.L77>
+
+00000878 <.LSM166>:
+                                buf_desc_ptr = &BD[(n<<1)|((USB_setup.wIndex.b[0]&0x80) ? 0x01:0x00)];    // compute pointer to the buffer descriptor for the specified EP
+ 878:	9e 42 78    	mov.b     [w14], w5
+ 87a:	05 82 fb    	ze        w5, w4
+ 87c:	04 02 42    	add.w     w4, w4, w4
+ 87e:	84 02 78    	mov.w     w4, w5
+ 880:	44 88 20    	mov.w     #0x884, w4
+ 882:	44 42 90    	mov.b     [w4+4], w4
+ 884:	04 02 fb    	se        w4, w4
+ 886:	4f 22 de    	lsr.w     w4, #0xf, w4
+ 888:	05 02 72    	ior.w     w4, w5, w4
+ 88a:	c2 22 dd    	sl.w      w4, #0x2, w5
+ 88c:	04 a0 20    	mov.w     #0xa00, w4
+ 88e:	04 82 42    	add.w     w5, w4, w4
+ 890:	24 07 98    	mov.w     w4, [w14+4]
+
+00000892 <.LSM167>:
+                                if (USB_setup.wIndex.b[0]&0x80) {    // if the specified EP direction is IN...
+ 892:	44 88 20    	mov.w     #0x884, w4
+ 894:	44 42 90    	mov.b     [w4+4], w4
+ 896:	e0 4f 52    	sub.b     w4, #0x0, [w15]
+ 898:	1a 00 3d    	bra       GE, 0x8ce <.L78>
+
+0000089a <.LSM168>:
+                                    if (U1EP[n]&0x04) {     // if EPn is enabled for IN transfers...
+ 89a:	1e 43 78    	mov.b     [w14], w6
+ 89c:	06 82 fb    	ze        w6, w4
+ 89e:	04 02 42    	add.w     w4, w4, w4
+ 8a0:	9e 02 90    	mov.w     [w14+2], w5
+ 8a2:	04 82 42    	add.w     w5, w4, w4
+ 8a4:	14 02 78    	mov.w     [w4], w4
+ 8a6:	64 02 62    	and.w     w4, #0x4, w4
+ 8a8:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ 8aa:	0a 00 32    	bra       Z, 0x8c0 <.L79>
+
+000008ac <.LSM169>:
+                                        buf_desc_ptr->status = (USB_setup.bRequest==CLEAR_FEATURE) ? 0x00:0x84;
+ 8ac:	44 88 20    	mov.w     #0x884, w4
+ 8ae:	14 42 90    	mov.b     [w4+1], w4
+ 8b0:	e1 4f 52    	sub.b     w4, #0x1, [w15]
+ 8b2:	02 00 3a    	bra       NZ, 0x8b8 <.L80>
+ 8b4:	00 42 eb    	clr.b     w4
+ 8b6:	01 00 37    	bra       0x8ba <.L81>
+
+000008b8 <.L80>:
+ 8b8:	44 c8 b3    	mov.b     #0x84, w4
+
+000008ba <.L81>:
+ 8ba:	ae 02 90    	mov.w     [w14+4], w5
+ 8bc:	94 42 98    	mov.b     w4, [w5+1]
+ 8be:	20 00 37    	bra       0x900 <.L77>
+
+000008c0 <.L79>:
+                                    } else {
+                                        USB_error_flags |= 0x01;    // set Request Error Flag
+ 8c0:	84 89 20    	mov.w     #0x898, w4
+ 8c2:	14 42 78    	mov.b     [w4], w4
+ 8c4:	04 04 a0    	bset.b    w4, #0x0
+ 8c6:	04 43 78    	mov.b     w4, w6
+ 8c8:	85 89 20    	mov.w     #0x898, w5
+ 8ca:	86 4a 78    	mov.b     w6, [w5]
+ 8cc:	19 00 37    	bra       0x900 <.L77>
+
+000008ce <.L78>:
+                                    }
+                                } else {                    // ...otherwise the specified EP direction is OUT, so...
+                                    if (U1EP[n]&0x08) {     // if EPn is enabled for OUT transfers...
+ 8ce:	9e 42 78    	mov.b     [w14], w5
+ 8d0:	05 82 fb    	ze        w5, w4
+ 8d2:	04 02 42    	add.w     w4, w4, w4
+ 8d4:	9e 02 90    	mov.w     [w14+2], w5
+ 8d6:	04 82 42    	add.w     w5, w4, w4
+ 8d8:	14 02 78    	mov.w     [w4], w4
+ 8da:	68 02 62    	and.w     w4, #0x8, w4
+ 8dc:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ 8de:	0a 00 32    	bra       Z, 0x8f4 <.L82>
+
+000008e0 <.LSM172>:
+                                        buf_desc_ptr->status = (USB_setup.bRequest==CLEAR_FEATURE) ? 0x88:0x84;
+ 8e0:	44 88 20    	mov.w     #0x884, w4
+ 8e2:	14 42 90    	mov.b     [w4+1], w4
+ 8e4:	e1 4f 52    	sub.b     w4, #0x1, [w15]
+ 8e6:	02 00 3a    	bra       NZ, 0x8ec <.L83>
+ 8e8:	84 c8 b3    	mov.b     #0x88, w4
+ 8ea:	01 00 37    	bra       0x8ee <.L84>
+
+000008ec <.L83>:
+ 8ec:	44 c8 b3    	mov.b     #0x84, w4
+
+000008ee <.L84>:
+ 8ee:	ae 02 90    	mov.w     [w14+4], w5
+ 8f0:	94 42 98    	mov.b     w4, [w5+1]
+ 8f2:	06 00 37    	bra       0x900 <.L77>
+
+000008f4 <.L82>:
+                                    } else {
+                                        USB_error_flags |= 0x01;    // set Request Error Flag
+ 8f4:	84 89 20    	mov.w     #0x898, w4
+ 8f6:	14 42 78    	mov.b     [w4], w4
+ 8f8:	04 04 a0    	bset.b    w4, #0x0
+ 8fa:	84 42 78    	mov.b     w4, w5
+ 8fc:	86 89 20    	mov.w     #0x898, w6
+ 8fe:	05 4b 78    	mov.b     w5, [w6]
+
+00000900 <.L77>:
+                                    }
+                                }
+                            }
+                            if (!(USB_error_flags&0x01)) {  // if there was no Request Error...
+ 900:	84 89 20    	mov.w     #0x898, w4
+ 902:	14 42 78    	mov.b     [w4], w4
+ 904:	04 82 fb    	ze        w4, w4
+ 906:	61 02 62    	and.w     w4, #0x1, w4
+ 908:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ 90a:	08 00 3a    	bra       NZ, 0x91c <.L85>
+
+0000090c <.LSM175>:
+                                BD[EP0IN].bytecount = 0x00;
+ 90c:	00 42 eb    	clr.b     w4
+ 90e:	84 42 78    	mov.b     w4, w5
+ 910:	46 a0 20    	mov.w     #0xa04, w6
+ 912:	05 4b 78    	mov.b     w5, [w6]
+
+00000914 <.LSM176>:
+                                BD[EP0IN].status = 0xC8;         // ...send packet as DATA1, set UOWN bit
+ 914:	84 cc b3    	mov.b     #0xc8, w4
+ 916:	84 42 78    	mov.b     w4, w5
+ 918:	56 a0 20    	mov.w     #0xa05, w6
+ 91a:	05 4b 78    	mov.b     w5, [w6]
+
+0000091c <.L85>:
+                            }
+                            break;
+ 91c:	06 00 37    	bra       0x92a <.L76>
+
+0000091e <.L130>:
+                        default:
+                            USB_error_flags |= 0x01;        // set Request Error Flag
+ 91e:	84 89 20    	mov.w     #0x898, w4
+ 920:	14 42 78    	mov.b     [w4], w4
+ 922:	04 04 a0    	bset.b    w4, #0x0
+ 924:	84 42 78    	mov.b     w4, w5
+ 926:	86 89 20    	mov.w     #0x898, w6
+ 928:	05 4b 78    	mov.b     w5, [w6]
+
+0000092a <.L76>:
+                    }
+                    break;
+ 92a:	07 00 37    	bra       0x93a <.L70>
+
+0000092c <.L128>:
+                default:
+                    USB_error_flags |= 0x01;                // set Request Error Flag
+ 92c:	84 89 20    	mov.w     #0x898, w4
+ 92e:	14 42 78    	mov.b     [w4], w4
+ 930:	04 04 a0    	bset.b    w4, #0x0
+ 932:	84 42 78    	mov.b     w4, w5
+ 934:	86 89 20    	mov.w     #0x898, w6
+ 936:	05 4b 78    	mov.b     w5, [w6]
+
+00000938 <.LSM181>:
+            }
+            break;
+ 938:	4d 01 37    	bra       0xbd4 <.L29>
+
+0000093a <.L70>:
+ 93a:	4c 01 37    	bra       0xbd4 <.L29>
+
+0000093c <.L33>:
+        case SET_ADDRESS:
+            if (USB_setup.wValue.b[0]>0x7F) {       // if new device address is illegal, send Request Error
+ 93c:	44 88 20    	mov.w     #0x884, w4
+ 93e:	24 42 90    	mov.b     [w4+2], w4
+ 940:	e0 4f 52    	sub.b     w4, #0x0, [w15]
+ 942:	07 00 3d    	bra       GE, 0x952 <.L86>
+
+00000944 <.LSM183>:
+                USB_error_flags |= 0x01;            // set Request Error Flag
+ 944:	84 89 20    	mov.w     #0x898, w4
+ 946:	14 42 78    	mov.b     [w4], w4
+ 948:	04 04 a0    	bset.b    w4, #0x0
+ 94a:	84 42 78    	mov.b     w4, w5
+ 94c:	86 89 20    	mov.w     #0x898, w6
+ 94e:	05 4b 78    	mov.b     w5, [w6]
+
+00000950 <.LSM184>:
+            } else {
+                USB_request.setup.bmRequestType = USB_setup.bmRequestType;  // processing a SET_ADDRESS request
+                USB_request.setup.bRequest = USB_setup.bRequest;
+                USB_request.setup.wValue.w = USB_setup.wValue.w;
+                USB_request.setup.wIndex.w = USB_setup.wIndex.w;
+                USB_request.setup.wLength.w = USB_setup.wLength.w;
+                BD[EP0IN].bytecount = 0x00;              // set EP0 IN byte count to 0
+                BD[EP0IN].status = 0xC8;                 // send packet as DATA1, set UOWN bit
+            }
+            break;
+ 950:	41 01 37    	bra       0xbd4 <.L29>
+
+00000952 <.L86>:
+ 952:	44 88 20    	mov.w     #0x884, w4
+ 954:	14 42 78    	mov.b     [w4], w4
+ 956:	84 42 78    	mov.b     w4, w5
+ 958:	c6 88 20    	mov.w     #0x88c, w6
+ 95a:	05 4b 78    	mov.b     w5, [w6]
+
+0000095c <.LSM186>:
+ 95c:	44 88 20    	mov.w     #0x884, w4
+ 95e:	14 42 90    	mov.b     [w4+1], w4
+ 960:	84 42 78    	mov.b     w4, w5
+ 962:	d6 88 20    	mov.w     #0x88d, w6
+ 964:	05 4b 78    	mov.b     w5, [w6]
+
+00000966 <.LSM187>:
+ 966:	44 88 20    	mov.w     #0x884, w4
+ 968:	14 02 90    	mov.w     [w4+2], w4
+ 96a:	74 44 88    	mov.w     w4, 0x88e
+
+0000096c <.LSM188>:
+ 96c:	44 88 20    	mov.w     #0x884, w4
+ 96e:	24 02 90    	mov.w     [w4+4], w4
+ 970:	84 44 88    	mov.w     w4, 0x890
+
+00000972 <.LSM189>:
+ 972:	44 88 20    	mov.w     #0x884, w4
+ 974:	34 02 90    	mov.w     [w4+6], w4
+ 976:	94 44 88    	mov.w     w4, 0x892
+
+00000978 <.LSM190>:
+ 978:	00 42 eb    	clr.b     w4
+ 97a:	84 42 78    	mov.b     w4, w5
+ 97c:	46 a0 20    	mov.w     #0xa04, w6
+ 97e:	05 4b 78    	mov.b     w5, [w6]
+
+00000980 <.LSM191>:
+ 980:	84 cc b3    	mov.b     #0xc8, w4
+ 982:	84 42 78    	mov.b     w4, w5
+ 984:	56 a0 20    	mov.w     #0xa05, w6
+ 986:	05 4b 78    	mov.b     w5, [w6]
+
+00000988 <.LSM192>:
+ 988:	25 01 37    	bra       0xbd4 <.L29>
+
+0000098a <.L34>:
+        case GET_DESCRIPTOR:
+            USB_request.setup.bmRequestType = USB_setup.bmRequestType;  // processing a GET_DESCRIPTOR request
+ 98a:	44 88 20    	mov.w     #0x884, w4
+ 98c:	14 42 78    	mov.b     [w4], w4
+ 98e:	84 42 78    	mov.b     w4, w5
+ 990:	c6 88 20    	mov.w     #0x88c, w6
+ 992:	05 4b 78    	mov.b     w5, [w6]
+
+00000994 <.LSM194>:
+            USB_request.setup.bRequest = USB_setup.bRequest;
+ 994:	44 88 20    	mov.w     #0x884, w4
+ 996:	14 42 90    	mov.b     [w4+1], w4
+ 998:	84 42 78    	mov.b     w4, w5
+ 99a:	d6 88 20    	mov.w     #0x88d, w6
+ 99c:	05 4b 78    	mov.b     w5, [w6]
+
+0000099e <.LSM195>:
+            USB_request.setup.wValue.w = USB_setup.wValue.w;
+ 99e:	44 88 20    	mov.w     #0x884, w4
+ 9a0:	14 02 90    	mov.w     [w4+2], w4
+ 9a2:	74 44 88    	mov.w     w4, 0x88e
+
+000009a4 <.LSM196>:
+            USB_request.setup.wIndex.w = USB_setup.wIndex.w;
+ 9a4:	44 88 20    	mov.w     #0x884, w4
+ 9a6:	24 02 90    	mov.w     [w4+4], w4
+ 9a8:	84 44 88    	mov.w     w4, 0x890
+
+000009aa <.LSM197>:
+            USB_request.setup.wLength.w = USB_setup.wLength.w;
+ 9aa:	44 88 20    	mov.w     #0x884, w4
+ 9ac:	34 02 90    	mov.w     [w4+6], w4
+ 9ae:	94 44 88    	mov.w     w4, 0x892
+
+000009b0 <.LSM198>:
+            switch (USB_setup.wValue.b[1]) {
+ 9b0:	44 88 20    	mov.w     #0x884, w4
+ 9b2:	34 42 90    	mov.b     [w4+3], w4
+ 9b4:	04 82 fb    	ze        w4, w4
+ 9b6:	e2 0f 52    	sub.w     w4, #0x2, [w15]
+ 9b8:	14 00 32    	bra       Z, 0x9e2 <.L90>
+ 9ba:	e3 0f 52    	sub.w     w4, #0x3, [w15]
+ 9bc:	3c 00 32    	bra       Z, 0xa36 <.L91>
+ 9be:	e1 0f 52    	sub.w     w4, #0x1, [w15]
+ 9c0:	66 00 3a    	bra       NZ, 0xa8e <.L131>
+
+000009c2 <.LSM199>:
+                case DEVICE:
+                    USB_request.data_ptr = Device;
+ 9c2:	24 2d 28    	mov.w     #0x82d2, w4
+ 9c4:	a4 44 88    	mov.w     w4, 0x894
+
+000009c6 <.LSM200>:
+                    USB_request.bytes_left.w = (unsigned int)USB_request.data_ptr[0];
+ 9c6:	a4 44 80    	mov.w     0x894, w4
+ 9c8:	14 42 78    	mov.b     [w4], w4
+ 9ca:	04 82 fb    	ze        w4, w4
+ 9cc:	b4 44 88    	mov.w     w4, 0x896
+
+000009ce <.LSM201>:
+                    if (USB_setup.wLength.w<USB_request.bytes_left.w) {
+ 9ce:	44 88 20    	mov.w     #0x884, w4
+ 9d0:	b4 02 90    	mov.w     [w4+6], w5
+ 9d2:	b4 44 80    	mov.w     0x896, w4
+ 9d4:	84 8f 52    	sub.w     w5, w4, [w15]
+ 9d6:	03 00 31    	bra       C, 0x9de <.L92>
+
+000009d8 <.LSM202>:
+                        USB_request.bytes_left.w = USB_setup.wLength.w;
+ 9d8:	44 88 20    	mov.w     #0x884, w4
+ 9da:	34 02 90    	mov.w     [w4+6], w4
+ 9dc:	b4 44 88    	mov.w     w4, 0x896
+
+000009de <.L92>:
+                    }
+                    SendDataPacket();
+ 9de:	60 01 07    	rcall     0xca0 <_SendDataPacket>
+
+000009e0 <.LSM204>:
+                    break;
+ 9e0:	5d 00 37    	bra       0xa9c <.L93>
+
+000009e2 <.L90>:
+                case CONFIGURATION:
+                    switch (USB_setup.wValue.b[0]) {
+ 9e2:	44 88 20    	mov.w     #0x884, w4
+ 9e4:	24 42 90    	mov.b     [w4+2], w4
+ 9e6:	04 82 fb    	ze        w4, w4
+ 9e8:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ 9ea:	03 00 3a    	bra       NZ, 0x9f2 <.L132>
+
+000009ec <.LSM206>:
+                        case 0:
+                            USB_request.data_ptr = Configuration1;
+ 9ec:	44 2e 28    	mov.w     #0x82e4, w4
+ 9ee:	a4 44 88    	mov.w     w4, 0x894
+
+000009f0 <.LSM207>:
+                            break;
+ 9f0:	06 00 37    	bra       0x9fe <.L96>
+
+000009f2 <.L132>:
+                        default:
+                            USB_error_flags |= 0x01;    // set Request Error Flag
+ 9f2:	84 89 20    	mov.w     #0x898, w4
+ 9f4:	14 42 78    	mov.b     [w4], w4
+ 9f6:	04 04 a0    	bset.b    w4, #0x0
+ 9f8:	84 42 78    	mov.b     w4, w5
+ 9fa:	86 89 20    	mov.w     #0x898, w6
+ 9fc:	05 4b 78    	mov.b     w5, [w6]
+
+000009fe <.L96>:
+                    }
+                    if (!(USB_error_flags&0x01)) {
+ 9fe:	84 89 20    	mov.w     #0x898, w4
+ a00:	14 42 78    	mov.b     [w4], w4
+ a02:	04 82 fb    	ze        w4, w4
+ a04:	61 02 62    	and.w     w4, #0x1, w4
+ a06:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ a08:	15 00 3a    	bra       NZ, 0xa34 <.L97>
+
+00000a0a <.LSM210>:
+                        USB_request.bytes_left.b[0] = USB_request.data_ptr[2];    // wTotalLength starting at an offset of 2
+ a0a:	a4 44 80    	mov.w     0x894, w4
+ a0c:	04 82 e8    	inc2.w    w4, w4
+ a0e:	14 42 78    	mov.b     [w4], w4
+ a10:	84 42 78    	mov.b     w4, w5
+ a12:	66 89 20    	mov.w     #0x896, w6
+ a14:	05 4b 78    	mov.b     w5, [w6]
+
+00000a16 <.LSM211>:
+                        USB_request.bytes_left.b[1] = USB_request.data_ptr[3];
+ a16:	a4 44 80    	mov.w     0x894, w4
+ a18:	63 02 42    	add.w     w4, #0x3, w4
+ a1a:	14 42 78    	mov.b     [w4], w4
+ a1c:	84 42 78    	mov.b     w4, w5
+ a1e:	76 89 20    	mov.w     #0x897, w6
+ a20:	05 4b 78    	mov.b     w5, [w6]
+
+00000a22 <.LSM212>:
+                        if (USB_setup.wLength.w<USB_request.bytes_left.w) {
+ a22:	44 88 20    	mov.w     #0x884, w4
+ a24:	b4 02 90    	mov.w     [w4+6], w5
+ a26:	b4 44 80    	mov.w     0x896, w4
+ a28:	84 8f 52    	sub.w     w5, w4, [w15]
+ a2a:	03 00 31    	bra       C, 0xa32 <.L98>
+
+00000a2c <.LSM213>:
+                            USB_request.bytes_left.w = USB_setup.wLength.w;
+ a2c:	44 88 20    	mov.w     #0x884, w4
+ a2e:	34 02 90    	mov.w     [w4+6], w4
+ a30:	b4 44 88    	mov.w     w4, 0x896
+
+00000a32 <.L98>:
+                        }
+                        SendDataPacket();
+ a32:	36 01 07    	rcall     0xca0 <_SendDataPacket>
+
+00000a34 <.L97>:
+                    }
+                    break;
+ a34:	33 00 37    	bra       0xa9c <.L93>
+
+00000a36 <.L91>:
+                case STRING:
+                    switch (USB_setup.wValue.b[0]) {
+ a36:	44 88 20    	mov.w     #0x884, w4
+ a38:	24 42 90    	mov.b     [w4+2], w4
+ a3a:	04 82 fb    	ze        w4, w4
+ a3c:	e1 0f 52    	sub.w     w4, #0x1, [w15]
+ a3e:	07 00 32    	bra       Z, 0xa4e <.L101>
+ a40:	e2 0f 52    	sub.w     w4, #0x2, [w15]
+ a42:	08 00 32    	bra       Z, 0xa54 <.L102>
+ a44:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ a46:	09 00 3a    	bra       NZ, 0xa5a <.L133>
+
+00000a48 <.LSM217>:
+                        case 0:
+                            USB_request.data_ptr = String0;
+ a48:	64 2f 28    	mov.w     #0x82f6, w4
+ a4a:	a4 44 88    	mov.w     w4, 0x894
+
+00000a4c <.LSM218>:
+                            break;
+ a4c:	0c 00 37    	bra       0xa66 <.L103>
+
+00000a4e <.L101>:
+                        case 1:
+                            USB_request.data_ptr = String1;
+ a4e:	a4 2f 28    	mov.w     #0x82fa, w4
+ a50:	a4 44 88    	mov.w     w4, 0x894
+
+00000a52 <.LSM220>:
+                            break;
+ a52:	09 00 37    	bra       0xa66 <.L103>
+
+00000a54 <.L102>:
+                        case 2:
+                            USB_request.data_ptr = String2;
+ a54:	44 31 28    	mov.w     #0x8314, w4
+ a56:	a4 44 88    	mov.w     w4, 0x894
+
+00000a58 <.LSM222>:
+                            break;
+ a58:	06 00 37    	bra       0xa66 <.L103>
+
+00000a5a <.L133>:
+                        default:
+                            USB_error_flags |= 0x01;    // set Request Error Flag
+ a5a:	84 89 20    	mov.w     #0x898, w4
+ a5c:	14 42 78    	mov.b     [w4], w4
+ a5e:	04 04 a0    	bset.b    w4, #0x0
+ a60:	84 42 78    	mov.b     w4, w5
+ a62:	86 89 20    	mov.w     #0x898, w6
+ a64:	05 4b 78    	mov.b     w5, [w6]
+
+00000a66 <.L103>:
+                    }
+                    if (!(USB_error_flags&0x01)) {
+ a66:	84 89 20    	mov.w     #0x898, w4
+ a68:	14 42 78    	mov.b     [w4], w4
+ a6a:	04 82 fb    	ze        w4, w4
+ a6c:	61 02 62    	and.w     w4, #0x1, w4
+ a6e:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ a70:	0d 00 3a    	bra       NZ, 0xa8c <.L104>
+
+00000a72 <.LSM225>:
+                        USB_request.bytes_left.w = (unsigned int)USB_request.data_ptr[0];
+ a72:	a4 44 80    	mov.w     0x894, w4
+ a74:	14 42 78    	mov.b     [w4], w4
+ a76:	04 82 fb    	ze        w4, w4
+ a78:	b4 44 88    	mov.w     w4, 0x896
+
+00000a7a <.LSM226>:
+                        if (USB_setup.wLength.w<USB_request.bytes_left.w) {
+ a7a:	44 88 20    	mov.w     #0x884, w4
+ a7c:	b4 02 90    	mov.w     [w4+6], w5
+ a7e:	b4 44 80    	mov.w     0x896, w4
+ a80:	84 8f 52    	sub.w     w5, w4, [w15]
+ a82:	03 00 31    	bra       C, 0xa8a <.L105>
+
+00000a84 <.LSM227>:
+                            USB_request.bytes_left.w = USB_setup.wLength.w;
+ a84:	44 88 20    	mov.w     #0x884, w4
+ a86:	34 02 90    	mov.w     [w4+6], w4
+ a88:	b4 44 88    	mov.w     w4, 0x896
+
+00000a8a <.L105>:
+                        }
+                        SendDataPacket();
+ a8a:	0a 01 07    	rcall     0xca0 <_SendDataPacket>
+
+00000a8c <.L104>:
+                    }
+                    break;
+ a8c:	07 00 37    	bra       0xa9c <.L93>
+
+00000a8e <.L131>:
+                default:
+                    USB_error_flags |= 0x01;            // set Request Error Flag
+ a8e:	84 89 20    	mov.w     #0x898, w4
+ a90:	14 42 78    	mov.b     [w4], w4
+ a92:	04 04 a0    	bset.b    w4, #0x0
+ a94:	84 42 78    	mov.b     w4, w5
+ a96:	86 89 20    	mov.w     #0x898, w6
+ a98:	05 4b 78    	mov.b     w5, [w6]
+
+00000a9a <.LSM231>:
+            }
+            break;
+ a9a:	9c 00 37    	bra       0xbd4 <.L29>
+
+00000a9c <.L93>:
+ a9c:	9b 00 37    	bra       0xbd4 <.L29>
+
+00000a9e <.L35>:
+        case GET_CONFIGURATION:
+            BD[EP0IN].address[0] = USB_curr_config;          // copy current device configuration to EP0 IN buffer
+ a9e:	34 50 80    	mov.w     0xa06, w4
+ aa0:	95 89 20    	mov.w     #0x899, w5
+ aa2:	95 42 78    	mov.b     [w5], w5
+ aa4:	05 4a 78    	mov.b     w5, [w4]
+
+00000aa6 <.LSM233>:
+            BD[EP0IN].bytecount = 0x01;
+ aa6:	14 c0 b3    	mov.b     #0x1, w4
+ aa8:	84 42 78    	mov.b     w4, w5
+ aaa:	46 a0 20    	mov.w     #0xa04, w6
+ aac:	05 4b 78    	mov.b     w5, [w6]
+
+00000aae <.LSM234>:
+            BD[EP0IN].status = 0xC8;                         // send packet as DATA1, set UOWN bit
+ aae:	84 cc b3    	mov.b     #0xc8, w4
+ ab0:	84 42 78    	mov.b     w4, w5
+ ab2:	56 a0 20    	mov.w     #0xa05, w6
+ ab4:	05 4b 78    	mov.b     w5, [w6]
+
+00000ab6 <.LSM235>:
+            break;
+ ab6:	8e 00 37    	bra       0xbd4 <.L29>
+
+00000ab8 <.L36>:
+        case SET_CONFIGURATION:
+            if (USB_setup.wValue.b[0]<=NUM_CONFIGURATIONS) {
+ ab8:	44 88 20    	mov.w     #0x884, w4
+ aba:	24 42 90    	mov.b     [w4+2], w4
+ abc:	e1 4f 52    	sub.b     w4, #0x1, [w15]
+ abe:	2c 00 3e    	bra       GTU, 0xb18 <.L106>
+
+00000ac0 <.LSM237>:
+                U1EP = (unsigned int *)&U1EP0;
+ ac0:	a4 4a 20    	mov.w     #0x4aa, w4
+ ac2:	14 07 98    	mov.w     w4, [w14+2]
+
+00000ac4 <.LSM238>:
+                for (n = 1; n<16; n++)
+ ac4:	14 c0 b3    	mov.b     #0x1, w4
+ ac6:	04 4f 78    	mov.b     w4, [w14]
+ ac8:	08 00 37    	bra       0xada <.L107>
+
+00000aca <.L108>:
+                    U1EP[n] = ENDPT_DISABLED;   // clear all EP control registers except for EP0 to disable EP1-EP15 prior to setting configuration
+ aca:	1e 43 78    	mov.b     [w14], w6
+ acc:	06 82 fb    	ze        w6, w4
+ ace:	04 02 42    	add.w     w4, w4, w4
+ ad0:	9e 02 90    	mov.w     [w14+2], w5
+ ad2:	04 82 42    	add.w     w5, w4, w4
+ ad4:	80 02 eb    	clr.w     w5
+ ad6:	05 0a 78    	mov.w     w5, [w4]
+
+00000ad8 <.LSM240>:
+ ad8:	1e 4f e8    	inc.b     [w14], [w14]
+
+00000ada <.L107>:
+ ada:	1e 42 78    	mov.b     [w14], w4
+ adc:	ef 4f 52    	sub.b     w4, #0xf, [w15]
+ ade:	f5 ff 36    	bra       LEU, 0xaca <.L108>
+
+00000ae0 <.LSM241>:
+                switch (USB_curr_config = USB_setup.wValue.b[0]) {
+ ae0:	44 88 20    	mov.w     #0x884, w4
+ ae2:	24 42 90    	mov.b     [w4+2], w4
+ ae4:	04 43 78    	mov.b     w4, w6
+ ae6:	95 89 20    	mov.w     #0x899, w5
+ ae8:	86 4a 78    	mov.b     w6, [w5]
+ aea:	94 89 20    	mov.w     #0x899, w4
+ aec:	14 42 78    	mov.b     [w4], w4
+ aee:	04 82 fb    	ze        w4, w4
+ af0:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ af2:	05 00 3a    	bra       NZ, 0xafe <.L134>
+
+00000af4 <.LSM242>:
+                    case 0:
+                        USB_USWSTAT = ADDRESS_STATE;
+ af4:	24 c0 b3    	mov.b     #0x2, w4
+ af6:	04 43 78    	mov.b     w4, w6
+ af8:	c5 89 20    	mov.w     #0x89c, w5
+ afa:	86 4a 78    	mov.b     w6, [w5]
+
+00000afc <.LSM243>:
+#ifdef SHOW_ENUM_STATUS
+                        PORTB &= 0xE0;
+                        PORTBbits.RB2 = 1;
+#endif
+                        break;
+ afc:	04 00 37    	bra       0xb06 <.L111>
+
+00000afe <.L134>:
+                    default:
+                        USB_USWSTAT = CONFIG_STATE;
+ afe:	34 c0 b3    	mov.b     #0x3, w4
+ b00:	04 43 78    	mov.b     w4, w6
+ b02:	c5 89 20    	mov.w     #0x89c, w5
+ b04:	86 4a 78    	mov.b     w6, [w5]
+
+00000b06 <.L111>:
+#ifdef SHOW_ENUM_STATUS
+                        PORTB &= 0xE0;
+                        PORTBbits.RB3 = 1;
+#endif
+                }
+                BD[EP0IN].bytecount = 0x00;                  // set EP0 IN byte count to 0
+ b06:	00 42 eb    	clr.b     w4
+ b08:	04 43 78    	mov.b     w4, w6
+ b0a:	45 a0 20    	mov.w     #0xa04, w5
+ b0c:	86 4a 78    	mov.b     w6, [w5]
+
+00000b0e <.LSM246>:
+                BD[EP0IN].status = 0xC8;                     // send packet as DATA1, set UOWN bit
+ b0e:	84 cc b3    	mov.b     #0xc8, w4
+ b10:	04 43 78    	mov.b     w4, w6
+ b12:	55 a0 20    	mov.w     #0xa05, w5
+ b14:	86 4a 78    	mov.b     w6, [w5]
+
+00000b16 <.LSM247>:
+            } else {
+                USB_error_flags |= 0x01;                // set Request Error Flag
+            }
+            break;
+ b16:	5e 00 37    	bra       0xbd4 <.L29>
+
+00000b18 <.L106>:
+ b18:	84 89 20    	mov.w     #0x898, w4
+ b1a:	14 42 78    	mov.b     [w4], w4
+ b1c:	04 04 a0    	bset.b    w4, #0x0
+ b1e:	04 43 78    	mov.b     w4, w6
+ b20:	85 89 20    	mov.w     #0x898, w5
+ b22:	86 4a 78    	mov.b     w6, [w5]
+
+00000b24 <.LSM249>:
+ b24:	57 00 37    	bra       0xbd4 <.L29>
+
+00000b26 <.L37>:
+        case GET_INTERFACE:
+            switch (USB_USWSTAT) {
+ b26:	c4 89 20    	mov.w     #0x89c, w4
+ b28:	14 42 78    	mov.b     [w4], w4
+ b2a:	04 82 fb    	ze        w4, w4
+ b2c:	e3 0f 52    	sub.w     w4, #0x3, [w15]
+ b2e:	18 00 3a    	bra       NZ, 0xb60 <.L135>
+
+00000b30 <.LSM251>:
+                case CONFIG_STATE:
+                    if (USB_setup.wIndex.b[0]<NUM_INTERFACES) {
+ b30:	44 88 20    	mov.w     #0x884, w4
+ b32:	44 42 90    	mov.b     [w4+4], w4
+ b34:	e0 4f 52    	sub.b     w4, #0x0, [w15]
+ b36:	0c 00 3a    	bra       NZ, 0xb50 <.L115>
+
+00000b38 <.LSM252>:
+                        BD[EP0IN].address[0] = 0x00;         // always send back 0 for bAlternateSetting
+ b38:	34 50 80    	mov.w     0xa06, w4
+ b3a:	80 42 eb    	clr.b     w5
+ b3c:	05 4a 78    	mov.b     w5, [w4]
+
+00000b3e <.LSM253>:
+                        BD[EP0IN].bytecount = 0x01;
+ b3e:	14 c0 b3    	mov.b     #0x1, w4
+ b40:	04 43 78    	mov.b     w4, w6
+ b42:	45 a0 20    	mov.w     #0xa04, w5
+ b44:	86 4a 78    	mov.b     w6, [w5]
+
+00000b46 <.LSM254>:
+                        BD[EP0IN].status = 0xC8;             // send packet as DATA1, set UOWN bit
+ b46:	84 cc b3    	mov.b     #0xc8, w4
+ b48:	04 43 78    	mov.b     w4, w6
+ b4a:	55 a0 20    	mov.w     #0xa05, w5
+ b4c:	86 4a 78    	mov.b     w6, [w5]
+ b4e:	06 00 37    	bra       0xb5c <.L116>
+
+00000b50 <.L115>:
+                    } else {
+                        USB_error_flags |= 0x01;        // set Request Error Flag
+ b50:	84 89 20    	mov.w     #0x898, w4
+ b52:	14 42 78    	mov.b     [w4], w4
+ b54:	04 04 a0    	bset.b    w4, #0x0
+ b56:	04 43 78    	mov.b     w4, w6
+ b58:	85 89 20    	mov.w     #0x898, w5
+ b5a:	86 4a 78    	mov.b     w6, [w5]
+
+00000b5c <.L116>:
+                    }
+                    break;
+ b5c:	00 00 00    	nop       
+
+00000b5e <.LSM257>:
+                default:
+                    USB_error_flags |= 0x01;            // set Request Error Flag
+            }
+            break;
+ b5e:	3a 00 37    	bra       0xbd4 <.L29>
+
+00000b60 <.L135>:
+ b60:	84 89 20    	mov.w     #0x898, w4
+ b62:	14 42 78    	mov.b     [w4], w4
+ b64:	04 04 a0    	bset.b    w4, #0x0
+ b66:	04 43 78    	mov.b     w4, w6
+ b68:	85 89 20    	mov.w     #0x898, w5
+ b6a:	86 4a 78    	mov.b     w6, [w5]
+
+00000b6c <.LSM259>:
+ b6c:	33 00 37    	bra       0xbd4 <.L29>
+
+00000b6e <.L38>:
+        case SET_INTERFACE:
+            switch (USB_USWSTAT) {
+ b6e:	c4 89 20    	mov.w     #0x89c, w4
+ b70:	14 42 78    	mov.b     [w4], w4
+ b72:	04 82 fb    	ze        w4, w4
+ b74:	e3 0f 52    	sub.w     w4, #0x3, [w15]
+ b76:	21 00 3a    	bra       NZ, 0xbba <.L136>
+
+00000b78 <.LSM261>:
+                case CONFIG_STATE:
+                    if (USB_setup.wIndex.b[0]<NUM_INTERFACES) {
+ b78:	44 88 20    	mov.w     #0x884, w4
+ b7a:	44 42 90    	mov.b     [w4+4], w4
+ b7c:	e0 4f 52    	sub.b     w4, #0x0, [w15]
+ b7e:	15 00 3a    	bra       NZ, 0xbaa <.L120>
+
+00000b80 <.LSM262>:
+                        switch (USB_setup.wValue.b[0]) {
+ b80:	44 88 20    	mov.w     #0x884, w4
+ b82:	24 42 90    	mov.b     [w4+2], w4
+ b84:	04 82 fb    	ze        w4, w4
+ b86:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ b88:	09 00 3a    	bra       NZ, 0xb9c <.L137>
+
+00000b8a <.LSM263>:
+                            case 0:                     // currently support only bAlternateSetting of 0
+                                BD[EP0IN].bytecount = 0x00;  // set EP0 IN byte count to 0
+ b8a:	00 42 eb    	clr.b     w4
+ b8c:	04 43 78    	mov.b     w4, w6
+ b8e:	45 a0 20    	mov.w     #0xa04, w5
+ b90:	86 4a 78    	mov.b     w6, [w5]
+
+00000b92 <.LSM264>:
+                                BD[EP0IN].status = 0xC8;     // send packet as DATA1, set UOWN bit
+ b92:	84 cc b3    	mov.b     #0xc8, w4
+ b94:	04 43 78    	mov.b     w4, w6
+ b96:	55 a0 20    	mov.w     #0xa05, w5
+ b98:	86 4a 78    	mov.b     w6, [w5]
+
+00000b9a <.LSM265>:
+                                break;
+ b9a:	0d 00 37    	bra       0xbb6 <.L124>
+
+00000b9c <.L137>:
+                            default:
+                                USB_error_flags |= 0x01;    // set Request Error Flag
+ b9c:	84 89 20    	mov.w     #0x898, w4
+ b9e:	14 42 78    	mov.b     [w4], w4
+ ba0:	04 04 a0    	bset.b    w4, #0x0
+ ba2:	04 43 78    	mov.b     w4, w6
+ ba4:	85 89 20    	mov.w     #0x898, w5
+ ba6:	86 4a 78    	mov.b     w6, [w5]
+ ba8:	06 00 37    	bra       0xbb6 <.L124>
+
+00000baa <.L120>:
+                        }
+                    } else {
+                        USB_error_flags |= 0x01;        // set Request Error Flag
+ baa:	84 89 20    	mov.w     #0x898, w4
+ bac:	14 42 78    	mov.b     [w4], w4
+ bae:	04 04 a0    	bset.b    w4, #0x0
+ bb0:	04 43 78    	mov.b     w4, w6
+ bb2:	85 89 20    	mov.w     #0x898, w5
+ bb4:	86 4a 78    	mov.b     w6, [w5]
+
+00000bb6 <.L124>:
+                    }
+                    break;
+ bb6:	00 00 00    	nop       
+
+00000bb8 <.LSM269>:
+                default:
+                    USB_error_flags |= 0x01;            // set Request Error Flag
+            }
+            break;
+ bb8:	0d 00 37    	bra       0xbd4 <.L29>
+
+00000bba <.L136>:
+ bba:	84 89 20    	mov.w     #0x898, w4
+ bbc:	14 42 78    	mov.b     [w4], w4
+ bbe:	04 04 a0    	bset.b    w4, #0x0
+ bc0:	04 43 78    	mov.b     w4, w6
+ bc2:	85 89 20    	mov.w     #0x898, w5
+ bc4:	86 4a 78    	mov.b     w6, [w5]
+
+00000bc6 <.LSM271>:
+ bc6:	06 00 37    	bra       0xbd4 <.L29>
+
+00000bc8 <.L30>:
+        case SET_DESCRIPTOR:
+        case SYNCH_FRAME:
+        default:
+            USB_error_flags |= 0x01;                    // set Request Error Flag
+ bc8:	84 89 20    	mov.w     #0x898, w4
+ bca:	14 42 78    	mov.b     [w4], w4
+ bcc:	04 04 a0    	bset.b    w4, #0x0
+ bce:	04 43 78    	mov.b     w4, w6
+ bd0:	85 89 20    	mov.w     #0x898, w5
+ bd2:	86 4a 78    	mov.b     w6, [w5]
+
+00000bd4 <.L29>:
+    }
+}
+ bd4:	00 80 fa    	ulnk      
+ bd6:	00 00 06    	return    
+
+00000bd8 <_ProcessInToken>:
+
+void ProcessInToken(void) {
+ bd8:	00 00 fa    	lnk       #0x0
+
+00000bda <.LSM275>:
+    switch (USB_USTAT&0xF0) {    // extract the EP bits
+ bda:	b4 89 20    	mov.w     #0x89b, w4
+ bdc:	14 42 78    	mov.b     [w4], w4
+ bde:	84 82 fb    	ze        w4, w5
+ be0:	04 0f 20    	mov.w     #0xf0, w4
+ be2:	04 82 62    	and.w     w5, w4, w4
+ be4:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ be6:	2f 00 3a    	bra       NZ, 0xc46 <.L138>
+
+00000be8 <.LSM276>:
+        case EP0:
+            switch (USB_request.setup.bmRequestType&0x60) {   // extract request type bits
+ be8:	c4 88 20    	mov.w     #0x88c, w4
+ bea:	14 42 78    	mov.b     [w4], w4
+ bec:	84 82 fb    	ze        w4, w5
+ bee:	04 06 20    	mov.w     #0x60, w4
+ bf0:	04 82 62    	and.w     w5, w4, w4
+ bf2:	05 02 20    	mov.w     #0x20, w5
+ bf4:	85 0f 52    	sub.w     w4, w5, [w15]
+ bf6:	23 00 32    	bra       Z, 0xc3e <.L152>
+ bf8:	05 04 20    	mov.w     #0x40, w5
+ bfa:	85 0f 52    	sub.w     w4, w5, [w15]
+ bfc:	1e 00 32    	bra       Z, 0xc3a <.L144>
+ bfe:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ c00:	21 00 3a    	bra       NZ, 0xc44 <.L153>
+
+00000c02 <.LSM277>:
+                case STANDARD_REQ:
+                    switch (USB_request.setup.bRequest) {
+ c02:	d4 88 20    	mov.w     #0x88d, w4
+ c04:	14 42 78    	mov.b     [w4], w4
+ c06:	04 82 fb    	ze        w4, w4
+ c08:	e5 0f 52    	sub.w     w4, #0x5, [w15]
+ c0a:	03 00 32    	bra       Z, 0xc12 <.L146>
+ c0c:	e6 0f 52    	sub.w     w4, #0x6, [w15]
+ c0e:	12 00 32    	bra       Z, 0xc34 <.L147>
+
+00000c10 <.LSM278>:
+                        case SET_ADDRESS:
+                            switch (U1ADDR = USB_request.setup.wValue.b[0]) {
+                                case 0:
+                                    USB_USWSTAT = DEFAULT_STATE;
+#ifdef SHOW_ENUM_STATUS
+                                    PORTB &= 0xE0;
+                                    PORTBbits.RB1 = 1;
+#endif
+                                    break;
+                                  default:
+                                    USB_USWSTAT = ADDRESS_STATE;
+#ifdef SHOW_ENUM_STATUS
+                                    PORTB &= 0xE0;
+                                    PORTBbits.RB2 = 1;
+#endif
+                            }
+                            break;
+                        case GET_DESCRIPTOR:
+                            SendDataPacket();
+                            break;
+                    }
+                    break;
+ c10:	17 00 37    	bra       0xc40 <.L141>
+
+00000c12 <.L146>:
+ c12:	e4 88 20    	mov.w     #0x88e, w4
+ c14:	14 42 78    	mov.b     [w4], w4
+ c16:	04 82 fb    	ze        w4, w4
+ c18:	b4 24 88    	mov.w     w4, 0x496
+ c1a:	b4 24 80    	mov.w     0x496, w4
+ c1c:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ c1e:	05 00 3a    	bra       NZ, 0xc2a <.L151>
+
+00000c20 <.LSM280>:
+ c20:	14 c0 b3    	mov.b     #0x1, w4
+ c22:	04 43 78    	mov.b     w4, w6
+ c24:	c5 89 20    	mov.w     #0x89c, w5
+ c26:	86 4a 78    	mov.b     w6, [w5]
+
+00000c28 <.LSM281>:
+ c28:	04 00 37    	bra       0xc32 <.L150>
+
+00000c2a <.L151>:
+ c2a:	24 c0 b3    	mov.b     #0x2, w4
+ c2c:	04 43 78    	mov.b     w4, w6
+ c2e:	c5 89 20    	mov.w     #0x89c, w5
+ c30:	86 4a 78    	mov.b     w6, [w5]
+
+00000c32 <.L150>:
+ c32:	02 00 37    	bra       0xc38 <.L145>
+
+00000c34 <.L147>:
+ c34:	35 00 07    	rcall     0xca0 <_SendDataPacket>
+
+00000c36 <.LSM285>:
+ c36:	00 00 00    	nop       
+
+00000c38 <.L145>:
+ c38:	03 00 37    	bra       0xc40 <.L141>
+
+00000c3a <.L144>:
+                case CLASS_REQ:
+                    break;
+                case VENDOR_REQ:
+                    VendorRequestsIn();
+ c3a:	0c 01 07    	rcall     0xe54 <_VendorRequestsIn>
+
+00000c3c <.LSM288>:
+                    break;
+ c3c:	01 00 37    	bra       0xc40 <.L141>
+
+00000c3e <.L152>:
+ c3e:	00 00 00    	nop       
+
+00000c40 <.L141>:
+            }
+            break;
+ c40:	00 00 00    	nop       
+ c42:	01 00 37    	bra       0xc46 <.L138>
+
+00000c44 <.L153>:
+ c44:	00 00 00    	nop       
+
+00000c46 <.L138>:
+    }
+}
+ c46:	00 80 fa    	ulnk      
+ c48:	00 00 06    	return    
+
+00000c4a <_ProcessOutToken>:
+
+void ProcessOutToken(void) {
+ c4a:	00 00 fa    	lnk       #0x0
+
+00000c4c <.LSM293>:
+    switch (USB_USTAT&0xF0) {    // extract the EP bits
+ c4c:	b4 89 20    	mov.w     #0x89b, w4
+ c4e:	14 42 78    	mov.b     [w4], w4
+ c50:	84 82 fb    	ze        w4, w5
+ c52:	04 0f 20    	mov.w     #0xf0, w4
+ c54:	04 82 62    	and.w     w5, w4, w4
+ c56:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ c58:	21 00 3a    	bra       NZ, 0xc9c <.L154>
+
+00000c5a <.LSM294>:
+        case EP0:
+            switch (USB_request.setup.bmRequestType&0x60) {   // extract request type bits
+ c5a:	c4 88 20    	mov.w     #0x88c, w4
+ c5c:	14 42 78    	mov.b     [w4], w4
+ c5e:	84 82 fb    	ze        w4, w5
+ c60:	04 06 20    	mov.w     #0x60, w4
+ c62:	04 82 62    	and.w     w5, w4, w4
+ c64:	05 02 20    	mov.w     #0x20, w5
+ c66:	85 0f 52    	sub.w     w4, w5, [w15]
+ c68:	05 00 32    	bra       Z, 0xc74 <.L161>
+ c6a:	05 04 20    	mov.w     #0x40, w5
+ c6c:	85 0f 52    	sub.w     w4, w5, [w15]
+ c6e:	04 00 3a    	bra       NZ, 0xc78 <.L162>
+
+00000c70 <.LSM295>:
+                case STANDARD_REQ:
+                    break;
+                case CLASS_REQ:
+                    break;
+                case VENDOR_REQ:
+                    VendorRequestsOut();
+ c70:	fa 00 07    	rcall     0xe66 <_VendorRequestsOut>
+
+00000c72 <.LSM296>:
+                    break;
+ c72:	03 00 37    	bra       0xc7a <.L157>
+
+00000c74 <.L161>:
+ c74:	00 00 00    	nop       
+ c76:	01 00 37    	bra       0xc7a <.L157>
+
+00000c78 <.L162>:
+ c78:	00 00 00    	nop       
+
+00000c7a <.L157>:
+            }
+            BD[EP0OUT].bytecount = MAX_PACKET_SIZE;
+ c7a:	04 c4 b3    	mov.b     #0x40, w4
+ c7c:	04 43 78    	mov.b     w4, w6
+ c7e:	05 a0 20    	mov.w     #0xa00, w5
+ c80:	86 4a 78    	mov.b     w6, [w5]
+
+00000c82 <.LSM300>:
+            BD[EP0OUT].status = 0x88;
+ c82:	84 c8 b3    	mov.b     #0x88, w4
+ c84:	04 43 78    	mov.b     w4, w6
+ c86:	15 a0 20    	mov.w     #0xa01, w5
+ c88:	86 4a 78    	mov.b     w6, [w5]
+
+00000c8a <.LSM301>:
+            BD[EP0IN].bytecount = 0x00;      // set EP0 IN byte count to 0
+ c8a:	00 42 eb    	clr.b     w4
+ c8c:	04 43 78    	mov.b     w4, w6
+ c8e:	45 a0 20    	mov.w     #0xa04, w5
+ c90:	86 4a 78    	mov.b     w6, [w5]
+
+00000c92 <.LSM302>:
+            BD[EP0IN].status = 0xC8;         // send packet as DATA1, set UOWN bit
+ c92:	84 cc b3    	mov.b     #0xc8, w4
+ c94:	04 43 78    	mov.b     w4, w6
+ c96:	55 a0 20    	mov.w     #0xa05, w5
+ c98:	86 4a 78    	mov.b     w6, [w5]
+
+00000c9a <.LSM303>:
+            break;
+ c9a:	00 00 00    	nop       
+
+00000c9c <.L154>:
+    }
+}
+ c9c:	00 80 fa    	ulnk      
+ c9e:	00 00 06    	return    
+
+00000ca0 <_SendDataPacket>:
+
+void SendDataPacket(void) {
+ ca0:	02 00 fa    	lnk       #0x2
+
+00000ca2 <.LSM306>:
+    BYTE packet_length, n;
+
+    if (USB_request.bytes_left.w<MAX_PACKET_SIZE) {
+ ca2:	b5 44 80    	mov.w     0x896, w5
+ ca4:	f4 03 20    	mov.w     #0x3f, w4
+ ca6:	84 8f 52    	sub.w     w5, w4, [w15]
+ ca8:	0d 00 3e    	bra       GTU, 0xcc4 <.L164>
+
+00000caa <.LSM307>:
+        packet_length = (BYTE)USB_request.bytes_left.w;
+ caa:	b4 44 80    	mov.w     0x896, w4
+ cac:	04 4f 78    	mov.b     w4, [w14]
+
+00000cae <.LSM308>:
+        USB_request.bytes_left.w = 0;
+ cae:	00 02 eb    	clr.w     w4
+ cb0:	b4 44 88    	mov.w     w4, 0x896
+
+00000cb2 <.LSM309>:
+        USB_request.setup.bmRequestType = NO_REQUEST;    // sending a short packet, so clear device request
+ cb2:	00 c2 eb    	setm.b    w4
+ cb4:	04 43 78    	mov.b     w4, w6
+ cb6:	c5 88 20    	mov.w     #0x88c, w5
+ cb8:	86 4a 78    	mov.b     w6, [w5]
+
+00000cba <.LSM310>:
+        USB_request.setup.bRequest = NO_REQUEST;
+ cba:	00 c2 eb    	setm.b    w4
+ cbc:	04 43 78    	mov.b     w4, w6
+ cbe:	d5 88 20    	mov.w     #0x88d, w5
+ cc0:	86 4a 78    	mov.b     w6, [w5]
+ cc2:	05 00 37    	bra       0xcce <.L165>
+
+00000cc4 <.L164>:
+    } else {
+        packet_length = MAX_PACKET_SIZE;
+ cc4:	04 c4 b3    	mov.b     #0x40, w4
+ cc6:	04 4f 78    	mov.b     w4, [w14]
+
+00000cc8 <.LSM312>:
+        USB_request.bytes_left.w -= MAX_PACKET_SIZE;
+ cc8:	b4 44 80    	mov.w     0x896, w4
+ cca:	04 04 b1    	sub.w     #0x40, w4
+ ccc:	b4 44 88    	mov.w     w4, 0x896
+
+00000cce <.L165>:
+    }
+    for (n = 0; n<packet_length; n++) {
+ cce:	00 42 eb    	clr.b     w4
+ cd0:	14 47 98    	mov.b     w4, [w14+1]
+ cd2:	0c 00 37    	bra       0xcec <.L166>
+
+00000cd4 <.L167>:
+        BD[EP0IN].address[n] = *USB_request.data_ptr++;
+ cd4:	35 50 80    	mov.w     0xa06, w5
+ cd6:	1e 42 90    	mov.b     [w14+1], w4
+ cd8:	04 82 fb    	ze        w4, w4
+ cda:	84 82 42    	add.w     w5, w4, w5
+ cdc:	a4 44 80    	mov.w     0x894, w4
+ cde:	14 43 78    	mov.b     [w4], w6
+ ce0:	86 4a 78    	mov.b     w6, [w5]
+ ce2:	04 02 e8    	inc.w     w4, w4
+ ce4:	a4 44 88    	mov.w     w4, 0x894
+
+00000ce6 <.LSM315>:
+ ce6:	1e 42 90    	mov.b     [w14+1], w4
+ ce8:	04 42 e8    	inc.b     w4, w4
+ cea:	14 47 98    	mov.b     w4, [w14+1]
+
+00000cec <.L166>:
+ cec:	1e 42 90    	mov.b     [w14+1], w4
+ cee:	9e 4f 52    	sub.b     w4, [w14], [w15]
+ cf0:	f1 ff 39    	bra       NC, 0xcd4 <.L167>
+
+00000cf2 <.LSM316>:
+    }
+    BD[EP0IN].bytecount = packet_length;
+ cf2:	9e 42 78    	mov.b     [w14], w5
+ cf4:	44 a0 20    	mov.w     #0xa04, w4
+ cf6:	05 4a 78    	mov.b     w5, [w4]
+
+00000cf8 <.LSM317>:
+    BD[EP0IN].status = ((BD[EP0IN].status^0x40)&0x40)|0x88; // toggle the DATA01 bit, clear the PIDs bits, and set the UOWN and DTS bits
+ cf8:	54 a0 20    	mov.w     #0xa05, w4
+ cfa:	14 42 78    	mov.b     [w4], w4
+ cfc:	04 c2 ea    	com.b     w4, w4
+ cfe:	06 c4 b3    	mov.b     #0x40, w6
+ d00:	86 42 62    	and.b     w4, w6, w5
+ d02:	84 c8 b3    	mov.b     #0x88, w4
+ d04:	04 c2 72    	ior.b     w5, w4, w4
+ d06:	04 43 78    	mov.b     w4, w6
+ d08:	55 a0 20    	mov.w     #0xa05, w5
+ d0a:	86 4a 78    	mov.b     w6, [w5]
+
+00000d0c <.LSM318>:
+}
+ d0c:	00 80 fa    	ulnk      
+ d0e:	00 00 06    	return    
+
+00000d10 <_VendorRequests>:
+//            USB_error_flags |= 0x01;                    // set Request Error Flag
+//    }
+//}
+
+void VendorRequests(void) {
+ d10:	06 00 fa    	lnk       #0x6
+
+00000d12 <.LSM1>:
+    unsigned int temp, i;
+    WORD data;
+
+    switch (USB_setup.bRequest) {
+ d12:	44 88 20    	mov.w     #0x884, w4
+ d14:	14 42 90    	mov.b     [w4+1], w4
+ d16:	04 82 fb    	ze        w4, w4
+ d18:	61 23 b9    	mul.su    w4, #0x1, w6
+ d1a:	e4 ff 2f    	mov.w     #0xfffe, w4
+ d1c:	f5 ff 2f    	mov.w     #0xffff, w5
+ d1e:	06 02 42    	add.w     w4, w6, w4
+ d20:	87 82 4a    	addc.w    w5, w7, w5
+ d22:	46 00 20    	mov.w     #0x4, w6
+ d24:	07 00 20    	mov.w     #0x0, w7
+ d26:	86 0f 52    	sub.w     w4, w6, [w15]
+ d28:	87 8f 5a    	subb.w    w5, w7, [w15]
+ d2a:	8c 00 3e    	bra       GTU, 0xe44 <.L2>
+ d2c:	04 60 01    	bra       w4
+ d2e:	04 00 37    	bra       0xd38 <.L3>
+ d30:	3d 00 37    	bra       0xdac <.L4>
+ d32:	50 00 37    	bra       0xdd4 <.L5>
+ d34:	87 00 37    	bra       0xe44 <.L2>
+ d36:	73 00 37    	bra       0xe1e <.L6>
+
+00000d38 <.L3>:
+        case READ_FLASH:
+            temp = TBLPAG;                 // save the value of TBLPAG
+ d38:	a4 02 80    	mov.w     0x54, w4
+ d3a:	14 07 98    	mov.w     w4, [w14+2]
+
+00000d3c <.LSM3>:
+            TBLPAG = USB_setup.wValue.w;
+ d3c:	44 88 20    	mov.w     #0x884, w4
+ d3e:	14 02 90    	mov.w     [w4+2], w4
+ d40:	a4 02 88    	mov.w     w4, 0x54
+
+00000d42 <.LSM4>:
+            for (i = 0; i<USB_setup.wLength.w; USB_setup.wIndex.w += 2) {
+ d42:	00 02 eb    	clr.w     w4
+ d44:	04 0f 78    	mov.w     w4, [w14]
+ d46:	21 00 37    	bra       0xd8a <.L8>
+
+00000d48 <.L9>:
+                data.w = __builtin_tblrdl(USB_setup.wIndex.w);
+ d48:	44 88 20    	mov.w     #0x884, w4
+ d4a:	24 02 90    	mov.w     [w4+4], w4
+ d4c:	14 02 ba    	tblrdl.w  [w4], w4
+ d4e:	24 07 98    	mov.w     w4, [w14+4]
+
+00000d50 <.LSM6>:
+                BD[EP0IN].address[i++] = data.b[0];
+ d50:	34 50 80    	mov.w     0xa06, w4
+ d52:	1e 02 42    	add.w     w4, [w14], w4
+ d54:	ce 42 90    	mov.b     [w14+4], w5
+ d56:	05 4a 78    	mov.b     w5, [w4]
+ d58:	1e 0f e8    	inc.w     [w14], [w14]
+
+00000d5a <.LSM7>:
+                BD[EP0IN].address[i++] = data.b[1];
+ d5a:	34 50 80    	mov.w     0xa06, w4
+ d5c:	1e 02 42    	add.w     w4, [w14], w4
+ d5e:	de 42 90    	mov.b     [w14+5], w5
+ d60:	05 4a 78    	mov.b     w5, [w4]
+ d62:	1e 0f e8    	inc.w     [w14], [w14]
+
+00000d64 <.LSM8>:
+                data.w = __builtin_tblrdh(USB_setup.wIndex.w);
+ d64:	44 88 20    	mov.w     #0x884, w4
+ d66:	24 02 90    	mov.w     [w4+4], w4
+ d68:	14 82 ba    	tblrdh.w  [w4], w4
+ d6a:	24 07 98    	mov.w     w4, [w14+4]
+
+00000d6c <.LSM9>:
+                BD[EP0IN].address[i++] = data.b[0];
+ d6c:	34 50 80    	mov.w     0xa06, w4
+ d6e:	1e 02 42    	add.w     w4, [w14], w4
+ d70:	ce 42 90    	mov.b     [w14+4], w5
+ d72:	05 4a 78    	mov.b     w5, [w4]
+ d74:	1e 0f e8    	inc.w     [w14], [w14]
+
+00000d76 <.LSM10>:
+                BD[EP0IN].address[i++] = data.b[1];
+ d76:	34 50 80    	mov.w     0xa06, w4
+ d78:	1e 02 42    	add.w     w4, [w14], w4
+ d7a:	de 42 90    	mov.b     [w14+5], w5
+ d7c:	05 4a 78    	mov.b     w5, [w4]
+ d7e:	1e 0f e8    	inc.w     [w14], [w14]
+
+00000d80 <.LSM11>:
+ d80:	44 88 20    	mov.w     #0x884, w4
+ d82:	24 02 90    	mov.w     [w4+4], w4
+ d84:	84 82 e8    	inc2.w    w4, w5
+ d86:	44 88 20    	mov.w     #0x884, w4
+ d88:	25 02 98    	mov.w     w5, [w4+4]
+
+00000d8a <.L8>:
+ d8a:	44 88 20    	mov.w     #0x884, w4
+ d8c:	34 02 90    	mov.w     [w4+6], w4
+ d8e:	9e 0f 52    	sub.w     w4, [w14], [w15]
+ d90:	db ff 3e    	bra       GTU, 0xd48 <.L9>
+
+00000d92 <.LSM12>:
+            }
+            TBLPAG = temp;                 // restore original value to TBLPAG
+ d92:	9e 02 90    	mov.w     [w14+2], w5
+ d94:	a5 02 88    	mov.w     w5, 0x54
+
+00000d96 <.LSM13>:
+            BD[EP0IN].bytecount = (BYTE)USB_setup.wLength.w;
+ d96:	44 88 20    	mov.w     #0x884, w4
+ d98:	34 02 90    	mov.w     [w4+6], w4
+ d9a:	04 42 78    	mov.b     w4, w4
+ d9c:	84 42 78    	mov.b     w4, w5
+ d9e:	46 a0 20    	mov.w     #0xa04, w6
+ da0:	05 4b 78    	mov.b     w5, [w6]
+
+00000da2 <.LSM14>:
+            BD[EP0IN].status = 0xC8;
+ da2:	84 cc b3    	mov.b     #0xc8, w4
+ da4:	84 42 78    	mov.b     w4, w5
+ da6:	56 a0 20    	mov.w     #0xa05, w6
+ da8:	05 4b 78    	mov.b     w5, [w6]
+
+00000daa <.LSM15>:
+            break;
+ daa:	52 00 37    	bra       0xe50 <.L1>
+
+00000dac <.L4>:
+        case WRITE_FLASH:
+            USB_request.setup.bmRequestType = USB_setup.bmRequestType;  // processing a WRITE_FLASH request
+ dac:	44 88 20    	mov.w     #0x884, w4
+ dae:	14 42 78    	mov.b     [w4], w4
+ db0:	84 42 78    	mov.b     w4, w5
+ db2:	c6 88 20    	mov.w     #0x88c, w6
+ db4:	05 4b 78    	mov.b     w5, [w6]
+
+00000db6 <.LSM17>:
+            USB_request.setup.bRequest = USB_setup.bRequest;
+ db6:	44 88 20    	mov.w     #0x884, w4
+ db8:	14 42 90    	mov.b     [w4+1], w4
+ dba:	84 42 78    	mov.b     w4, w5
+ dbc:	d6 88 20    	mov.w     #0x88d, w6
+ dbe:	05 4b 78    	mov.b     w5, [w6]
+
+00000dc0 <.LSM18>:
+            USB_request.setup.wValue.w = USB_setup.wValue.w;
+ dc0:	44 88 20    	mov.w     #0x884, w4
+ dc2:	14 02 90    	mov.w     [w4+2], w4
+ dc4:	74 44 88    	mov.w     w4, 0x88e
+
+00000dc6 <.LSM19>:
+            USB_request.setup.wIndex.w = USB_setup.wIndex.w;
+ dc6:	44 88 20    	mov.w     #0x884, w4
+ dc8:	24 02 90    	mov.w     [w4+4], w4
+ dca:	84 44 88    	mov.w     w4, 0x890
+
+00000dcc <.LSM20>:
+            USB_request.setup.wLength.w = USB_setup.wLength.w;
+ dcc:	44 88 20    	mov.w     #0x884, w4
+ dce:	34 02 90    	mov.w     [w4+6], w4
+ dd0:	94 44 88    	mov.w     w4, 0x892
+
+00000dd2 <.LSM21>:
+            break;
+ dd2:	3e 00 37    	bra       0xe50 <.L1>
+
+00000dd4 <.L5>:
+        case ERASE_FLASH:
+            NVMCON = 0x4042;                // set up NVMCON to erase a page of program memory
+ dd4:	24 04 24    	mov.w     #0x4042, w4
+ dd6:	04 3b 88    	mov.w     w4, 0x760
+
+00000dd8 <.LSM23>:
+            temp = TBLPAG;                  // save the value of TBLPAG
+ dd8:	a6 02 80    	mov.w     0x54, w6
+ dda:	16 07 98    	mov.w     w6, [w14+2]
+
+00000ddc <.LSM24>:
+            TBLPAG = USB_setup.wValue.w;
+ ddc:	44 88 20    	mov.w     #0x884, w4
+ dde:	14 02 90    	mov.w     [w4+2], w4
+ de0:	a4 02 88    	mov.w     w4, 0x54
+
+00000de2 <.LSM25>:
+            __builtin_tblwtl(USB_setup.wIndex.w, 0x0000);
+ de2:	44 88 20    	mov.w     #0x884, w4
+ de4:	24 02 90    	mov.w     [w4+4], w4
+ de6:	80 02 eb    	clr.w     w5
+ de8:	05 0a bb    	tblwtl.w  w5, [w4]
+
+00000dea <.LSM26>:
+            __asm__("DISI #16");            // disable interrupts for 16 cycles
+ dea:	10 00 fc    	disi      #0x10
+
+00000dec <.LSM27>:
+            __builtin_write_NVM();          // issue the unlock sequence and perform the write
+ dec:	54 05 20    	mov.w     #0x55, w4
+ dee:	34 3b 88    	mov.w     w4, 0x766
+ df0:	a4 0a 20    	mov.w     #0xaa, w4
+ df2:	34 3b 88    	mov.w     w4, 0x766
+ df4:	61 e7 a8    	bset.b    0x761, #0x7
+	...
+
+00000dfa <.LSM28>:
+            while (NVMCONbits.WR==1) {}     // wait until the write is complete
+ dfa:	00 00 00    	nop       
+
+00000dfc <.L11>:
+ dfc:	05 3b 80    	mov.w     0x760, w5
+ dfe:	04 00 28    	mov.w     #0x8000, w4
+ e00:	04 82 62    	and.w     w5, w4, w4
+ e02:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ e04:	fb ff 3a    	bra       NZ, 0xdfc <.L11>
+
+00000e06 <.LSM29>:
+            NVMCONbits.WREN = 0;            // disable further writes to program memory
+ e06:	61 c7 a9    	bclr.b    0x761, #0x6
+
+00000e08 <.LSM30>:
+            TBLPAG = temp;                  // restore original value to TBLPAG
+ e08:	1e 02 90    	mov.w     [w14+2], w4
+ e0a:	a4 02 88    	mov.w     w4, 0x54
+
+00000e0c <.LSM31>:
+            BD[EP0IN].bytecount = 0x00;     // set EP0 IN byte count to 0
+ e0c:	00 42 eb    	clr.b     w4
+ e0e:	04 43 78    	mov.b     w4, w6
+ e10:	45 a0 20    	mov.w     #0xa04, w5
+ e12:	86 4a 78    	mov.b     w6, [w5]
+
+00000e14 <.LSM32>:
+            BD[EP0IN].status = 0xC8;        // send packet as DATA1, set UOWN bit
+ e14:	84 cc b3    	mov.b     #0xc8, w4
+ e16:	04 43 78    	mov.b     w4, w6
+ e18:	55 a0 20    	mov.w     #0xa05, w5
+ e1a:	86 4a 78    	mov.b     w6, [w5]
+
+00000e1c <.LSM33>:
+            break;
+ e1c:	19 00 37    	bra       0xe50 <.L1>
+
+00000e1e <.L6>:
+        case START_USER:
+            BOOT_QUIT = 1;
+ e1e:	14 c0 b3    	mov.b     #0x1, w4
+ e20:	04 43 78    	mov.b     w4, w6
+ e22:	e5 89 20    	mov.w     #0x89e, w5
+ e24:	86 4a 78    	mov.b     w6, [w5]
+
+00000e26 <.LSM35>:
+            BOOT_COUNTDOWN.w[0] = USB_setup.wValue.w;
+ e26:	44 88 20    	mov.w     #0x884, w4
+ e28:	14 02 90    	mov.w     [w4+2], w4
+ e2a:	04 45 88    	mov.w     w4, 0x8a0
+
+00000e2c <.LSM36>:
+            BOOT_COUNTDOWN.w[1] = USB_setup.wIndex.w;
+ e2c:	44 88 20    	mov.w     #0x884, w4
+ e2e:	24 02 90    	mov.w     [w4+4], w4
+ e30:	14 45 88    	mov.w     w4, 0x8a2
+
+00000e32 <.LSM37>:
+            BD[EP0IN].bytecount = 0x00;     // set EP0 IN byte count to 0
+ e32:	00 42 eb    	clr.b     w4
+ e34:	04 43 78    	mov.b     w4, w6
+ e36:	45 a0 20    	mov.w     #0xa04, w5
+ e38:	86 4a 78    	mov.b     w6, [w5]
+
+00000e3a <.LSM38>:
+            BD[EP0IN].status = 0xC8;        // send packet as DATA1, set UOWN bit
+ e3a:	84 cc b3    	mov.b     #0xc8, w4
+ e3c:	04 43 78    	mov.b     w4, w6
+ e3e:	55 a0 20    	mov.w     #0xa05, w5
+ e40:	86 4a 78    	mov.b     w6, [w5]
+
+00000e42 <.LSM39>:
+            break;
+ e42:	06 00 37    	bra       0xe50 <.L1>
+
+00000e44 <.L2>:
+        default:
+            USB_error_flags |= 0x01;        // set Request Error Flag
+ e44:	84 89 20    	mov.w     #0x898, w4
+ e46:	14 42 78    	mov.b     [w4], w4
+ e48:	04 04 a0    	bset.b    w4, #0x0
+ e4a:	04 43 78    	mov.b     w4, w6
+ e4c:	85 89 20    	mov.w     #0x898, w5
+ e4e:	86 4a 78    	mov.b     w6, [w5]
+
+00000e50 <.L1>:
+    }
+}
+ e50:	00 80 fa    	ulnk      
+ e52:	00 00 06    	return    
+
+00000e54 <_VendorRequestsIn>:
+
+void VendorRequestsIn(void) {
+ e54:	00 00 fa    	lnk       #0x0
+
+00000e56 <.LSM43>:
+    switch (USB_request.setup.bRequest) {
+        default:
+            USB_error_flags |= 0x01;                    // set Request Error Flag
+ e56:	84 89 20    	mov.w     #0x898, w4
+ e58:	14 42 78    	mov.b     [w4], w4
+ e5a:	04 04 a0    	bset.b    w4, #0x0
+ e5c:	04 43 78    	mov.b     w4, w6
+ e5e:	85 89 20    	mov.w     #0x898, w5
+ e60:	86 4a 78    	mov.b     w6, [w5]
+
+00000e62 <.LSM44>:
+    }
+}
+ e62:	00 80 fa    	ulnk      
+ e64:	00 00 06    	return    
+
+00000e66 <_VendorRequestsOut>:
+
+void VendorRequestsOut(void) {
+ e66:	08 00 fa    	lnk       #0x8
+
+00000e68 <.LSM46>:
+    unsigned int temp, row, i;
+    WORD data;
+
+    switch (USB_request.setup.bRequest) {
+ e68:	d4 88 20    	mov.w     #0x88d, w4
+ e6a:	14 42 78    	mov.b     [w4], w4
+ e6c:	04 82 fb    	ze        w4, w4
+ e6e:	e3 0f 52    	sub.w     w4, #0x3, [w15]
+ e70:	50 00 3a    	bra       NZ, 0xf12 <.L22>
+
+00000e72 <.LSM47>:
+        case WRITE_FLASH:
+            NVMCON = 0x4001;                // set up NVMCON to program a row of program memory
+ e72:	14 00 24    	mov.w     #0x4001, w4
+ e74:	04 3b 88    	mov.w     w4, 0x760
+
+00000e76 <.LSM48>:
+            temp = TBLPAG;                  // save the value of TBLPAG
+ e76:	a4 02 80    	mov.w     0x54, w4
+ e78:	14 07 98    	mov.w     w4, [w14+2]
+
+00000e7a <.LSM49>:
+            TBLPAG = USB_request.setup.wValue.w;
+ e7a:	74 44 80    	mov.w     0x88e, w4
+ e7c:	a4 02 88    	mov.w     w4, 0x54
+
+00000e7e <.LSM50>:
+            row = USB_request.setup.wIndex.w&0xFFF8;
+ e7e:	85 44 80    	mov.w     0x890, w5
+ e80:	84 ff 2f    	mov.w     #0xfff8, w4
+ e82:	04 82 62    	and.w     w5, w4, w4
+ e84:	24 07 98    	mov.w     w4, [w14+4]
+
+00000e86 <.LSM51>:
+            for (i = 0; i<128; i += 2) {
+ e86:	00 02 eb    	clr.w     w4
+ e88:	04 0f 78    	mov.w     w4, [w14]
+ e8a:	0a 00 37    	bra       0xea0 <.L16>
+
+00000e8c <.L17>:
+                __builtin_tblwtl(row + i, 0xFFFF);
+ e8c:	2e 02 90    	mov.w     [w14+4], w4
+ e8e:	1e 02 42    	add.w     w4, [w14], w4
+ e90:	80 82 eb    	setm.w    w5
+ e92:	05 0a bb    	tblwtl.w  w5, [w4]
+
+00000e94 <.LSM53>:
+                __builtin_tblwth(row + i + 1, 0x00FF);
+ e94:	2e 02 90    	mov.w     [w14+4], w4
+ e96:	1e 02 42    	add.w     w4, [w14], w4
+ e98:	04 02 e8    	inc.w     w4, w4
+ e9a:	f5 0f 20    	mov.w     #0xff, w5
+ e9c:	05 8a bb    	tblwth.w  w5, [w4]
+
+00000e9e <.LSM54>:
+ e9e:	1e 8f e8    	inc2.w    [w14], [w14]
+
+00000ea0 <.L16>:
+ ea0:	f4 07 20    	mov.w     #0x7f, w4
+ ea2:	9e 02 78    	mov.w     [w14], w5
+ ea4:	84 8f 52    	sub.w     w5, w4, [w15]
+ ea6:	f2 ff 36    	bra       LEU, 0xe8c <.L17>
+
+00000ea8 <.LSM55>:
+            }
+            for (i = 0; i<USB_request.setup.wLength.w; USB_request.setup.wIndex.w += 2) {
+ ea8:	00 02 eb    	clr.w     w4
+ eaa:	04 0f 78    	mov.w     w4, [w14]
+ eac:	1d 00 37    	bra       0xee8 <.L18>
+
+00000eae <.L19>:
+                data.b[0] = BD[EP0OUT].address[i++];
+ eae:	14 50 80    	mov.w     0xa02, w4
+ eb0:	1e 02 42    	add.w     w4, [w14], w4
+ eb2:	14 42 78    	mov.b     [w4], w4
+ eb4:	64 47 98    	mov.b     w4, [w14+6]
+ eb6:	1e 0f e8    	inc.w     [w14], [w14]
+
+00000eb8 <.LSM57>:
+                data.b[1] = BD[EP0OUT].address[i++];
+ eb8:	14 50 80    	mov.w     0xa02, w4
+ eba:	1e 02 42    	add.w     w4, [w14], w4
+ ebc:	14 42 78    	mov.b     [w4], w4
+ ebe:	74 47 98    	mov.b     w4, [w14+7]
+ ec0:	1e 0f e8    	inc.w     [w14], [w14]
+
+00000ec2 <.LSM58>:
+                __builtin_tblwtl(USB_request.setup.wIndex.w, data.w);
+ ec2:	be 02 90    	mov.w     [w14+6], w5
+ ec4:	84 44 80    	mov.w     0x890, w4
+ ec6:	05 0a bb    	tblwtl.w  w5, [w4]
+
+00000ec8 <.LSM59>:
+                data.b[0] = BD[EP0OUT].address[i++];
+ ec8:	14 50 80    	mov.w     0xa02, w4
+ eca:	1e 02 42    	add.w     w4, [w14], w4
+ ecc:	14 42 78    	mov.b     [w4], w4
+ ece:	64 47 98    	mov.b     w4, [w14+6]
+ ed0:	1e 0f e8    	inc.w     [w14], [w14]
+
+00000ed2 <.LSM60>:
+                data.b[1] = BD[EP0OUT].address[i++];
+ ed2:	14 50 80    	mov.w     0xa02, w4
+ ed4:	1e 02 42    	add.w     w4, [w14], w4
+ ed6:	14 42 78    	mov.b     [w4], w4
+ ed8:	74 47 98    	mov.b     w4, [w14+7]
+ eda:	1e 0f e8    	inc.w     [w14], [w14]
+
+00000edc <.LSM61>:
+                __builtin_tblwth(USB_request.setup.wIndex.w, data.w);
+ edc:	be 02 90    	mov.w     [w14+6], w5
+ ede:	84 44 80    	mov.w     0x890, w4
+ ee0:	05 8a bb    	tblwth.w  w5, [w4]
+
+00000ee2 <.LSM62>:
+ ee2:	84 44 80    	mov.w     0x890, w4
+ ee4:	04 82 e8    	inc2.w    w4, w4
+ ee6:	84 44 88    	mov.w     w4, 0x890
+
+00000ee8 <.L18>:
+ ee8:	94 44 80    	mov.w     0x892, w4
+ eea:	9e 0f 52    	sub.w     w4, [w14], [w15]
+ eec:	e0 ff 3e    	bra       GTU, 0xeae <.L19>
+
+00000eee <.LSM63>:
+            }
+            __asm__("DISI #16");            // disable interrupts for 16 cycles
+ eee:	10 00 fc    	disi      #0x10
+
+00000ef0 <.LSM64>:
+            __builtin_write_NVM();          // issue the unlock sequence and perform the write
+ ef0:	54 05 20    	mov.w     #0x55, w4
+ ef2:	34 3b 88    	mov.w     w4, 0x766
+ ef4:	a4 0a 20    	mov.w     #0xaa, w4
+ ef6:	34 3b 88    	mov.w     w4, 0x766
+ ef8:	61 e7 a8    	bset.b    0x761, #0x7
+	...
+
+00000efe <.LSM65>:
+            while (NVMCONbits.WR==1) {}     // wait until the write is done
+ efe:	00 00 00    	nop       
+
+00000f00 <.L20>:
+ f00:	05 3b 80    	mov.w     0x760, w5
+ f02:	04 00 28    	mov.w     #0x8000, w4
+ f04:	04 82 62    	and.w     w5, w4, w4
+ f06:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ f08:	fb ff 3a    	bra       NZ, 0xf00 <.L20>
+
+00000f0a <.LSM66>:
+            NVMCONbits.WREN = 0;            // disable further writes to program memory
+ f0a:	61 c7 a9    	bclr.b    0x761, #0x6
+
+00000f0c <.LSM67>:
+            TBLPAG = temp;                  // restore original value to TBLPAG
+ f0c:	9e 02 90    	mov.w     [w14+2], w5
+ f0e:	a5 02 88    	mov.w     w5, 0x54
+
+00000f10 <.LSM68>:
+            break;
+ f10:	06 00 37    	bra       0xf1e <.L13>
+
+00000f12 <.L22>:
+        default:
+            USB_error_flags |= 0x01;                    // set Request Error Flag
+ f12:	84 89 20    	mov.w     #0x898, w4
+ f14:	14 42 78    	mov.b     [w4], w4
+ f16:	04 04 a0    	bset.b    w4, #0x0
+ f18:	84 42 78    	mov.b     w4, w5
+ f1a:	86 89 20    	mov.w     #0x898, w6
+ f1c:	05 4b 78    	mov.b     w5, [w6]
+
+00000f1e <.L13>:
+    }
+}
+ f1e:	00 80 fa    	ulnk      
+ f20:	00 00 06    	return    
+
+00000f22 <_main>:
+
+int main(void) {
+ f22:	00 00 fa    	lnk       #0x0
+
+00000f24 <.LSM72>:
+    CLKDIV = 0x0100;    // RCDIV = 001 (4MHz, div2), CPDIV = 00 (FOSC = 32MHz, FCY = 16MHz)
+ f24:	04 10 20    	mov.w     #0x100, w4
+ f26:	34 3a 88    	mov.w     w4, 0x746
+
+00000f28 <.LSM73>:
+    ANSB = 0x0000;      // Make all pins digital I/Os
+ f28:	00 02 eb    	clr.w     w4
+ f2a:	14 27 88    	mov.w     w4, 0x4e2
+
+00000f2c <.LSM74>:
+    ANSC = 0x0000;
+ f2c:	00 02 eb    	clr.w     w4
+ f2e:	24 27 88    	mov.w     w4, 0x4e4
+
+00000f30 <.LSM75>:
+    ANSD = 0x0000;
+ f30:	00 02 eb    	clr.w     w4
+ f32:	34 27 88    	mov.w     w4, 0x4e6
+
+00000f34 <.LSM76>:
+    ANSF = 0x0000;
+ f34:	00 02 eb    	clr.w     w4
+ f36:	54 27 88    	mov.w     w4, 0x4ea
+
+00000f38 <.LSM77>:
+    ANSG = 0x0000;
+ f38:	00 02 eb    	clr.w     w4
+ f3a:	64 27 88    	mov.w     w4, 0x4ec
+
+00000f3c <.LSM78>:
+    if (SW1) {
+ f3c:	95 16 80    	mov.w     0x2d2, w5
+ f3e:	04 00 28    	mov.w     #0x8000, w4
+ f40:	04 82 62    	and.w     w5, w4, w4
+ f42:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ f44:	02 00 32    	bra       Z, 0xf4a <.L24>
+
+00000f46 <.LSM79>:
+        __asm__("goto 0x1000");
+ f46:	00 10 04    	goto      0x1000 <__DefaultInterrupt+0x2e>
+ f48:	00 00 00 
+
+00000f4a <.L24>:
+    }
+    T1CON = 0x8030;     // Configure and enable Timer1 (TCKPS<1:0> = 11, prescalar of 1:256)
+ f4a:	04 03 28    	mov.w     #0x8030, w4
+ f4c:	24 08 88    	mov.w     w4, 0x104
+
+00000f4e <.LSM81>:
+    PR1 = 6250;         // Set Timer1 period register so Timer1 goes off in intervals of 100 ms
+ f4e:	a4 86 21    	mov.w     #0x186a, w4
+ f50:	14 08 88    	mov.w     w4, 0x102
+
+00000f52 <.LSM82>:
+    LED1TRIS = 0;
+ f52:	d8 e2 a9    	bclr.b    0x2d8, #0x7
+
+00000f54 <.LSM83>:
+    LED1 = 1;           // Turn on LED1
+ f54:	da e2 a8    	bset.b    0x2da, #0x7
+
+00000f56 <.LSM84>:
+    while (!VBUS) {     // Blink LED1 at 5 Hz until USB is plugged in (i.e., VBUS is present)
+ f56:	15 00 37    	bra       0xf82 <.L25>
+
+00000f58 <.L26>:
+        if (IFS0bits.T1IF) {    // If Timer1 has gone off...
+ f58:	24 04 80    	mov.w     0x84, w4
+ f5a:	68 02 62    	and.w     w4, #0x8, w4
+ f5c:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ f5e:	11 00 32    	bra       Z, 0xf82 <.L25>
+
+00000f60 <.LSM86>:
+            LED1 = !LED1;       // ...toggle LED1
+ f60:	d5 16 80    	mov.w     0x2da, w5
+ f62:	04 08 20    	mov.w     #0x80, w4
+ f64:	04 82 62    	and.w     w5, w4, w4
+ f66:	04 f0 a7    	btsc.w    w4, #0xf
+ f68:	04 02 ea    	neg.w     w4, w4
+ f6a:	04 02 e9    	dec.w     w4, w4
+ f6c:	4f 22 de    	lsr.w     w4, #0xf, w4
+ f6e:	04 42 78    	mov.b     w4, w4
+ f70:	04 82 fb    	ze        w4, w4
+ f72:	61 02 62    	and.w     w4, #0x1, w4
+ f74:	47 22 dd    	sl.w      w4, #0x7, w4
+ f76:	d6 16 80    	mov.w     0x2da, w6
+ f78:	f5 f7 2f    	mov.w     #0xff7f, w5
+ f7a:	85 02 63    	and.w     w6, w5, w5
+ f7c:	05 02 72    	ior.w     w4, w5, w4
+ f7e:	d4 16 88    	mov.w     w4, 0x2da
+
+00000f80 <.LSM87>:
+            IFS0bits.T1IF = 0;  // ...and lower the Timer1 flag
+ f80:	84 60 a9    	bclr.b    0x84, #0x3
+
+00000f82 <.L25>:
+ f82:	55 17 80    	mov.w     0x2ea, w5
+ f84:	04 08 20    	mov.w     #0x80, w4
+ f86:	04 82 62    	and.w     w5, w4, w4
+ f88:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ f8a:	e6 ff 32    	bra       Z, 0xf58 <.L26>
+
+00000f8c <.LSM89>:
+        }
+    }
+    LED1 = 0;           // Turn off LED1
+ f8c:	da e2 a9    	bclr.b    0x2da, #0x7
+
+00000f8e <.LSM90>:
+    InitUSB();          // Initialize the USB registers and serial interface engine
+ f8e:	d9 f9 07    	rcall     0x342
+
+00000f90 <.LSM91>:
+    BOOT_QUIT = 0;
+ f90:	00 42 eb    	clr.b     w4
+ f92:	04 43 78    	mov.b     w4, w6
+ f94:	e5 89 20    	mov.w     #0x89e, w5
+ f96:	86 4a 78    	mov.b     w6, [w5]
+
+00000f98 <.L29>:
+    while (1) {
+        if (BOOT_QUIT) {
+ f98:	e4 89 20    	mov.w     #0x89e, w4
+ f9a:	14 42 78    	mov.b     [w4], w4
+ f9c:	e0 4f 52    	sub.b     w4, #0x0, [w15]
+ f9e:	0d 00 32    	bra       Z, 0xfba <.L27>
+
+00000fa0 <.LSM93>:
+            if (BOOT_COUNTDOWN.ul>0) {
+ fa0:	04 45 80    	mov.w     0x8a0, w4
+ fa2:	15 45 80    	mov.w     0x8a2, w5
+ fa4:	e0 0f 52    	sub.w     w4, #0x0, [w15]
+ fa6:	e0 8f 5a    	subb.w    w5, #0x0, [w15]
+ fa8:	07 00 32    	bra       Z, 0xfb8 <.L28>
+
+00000faa <.LSM94>:
+                BOOT_COUNTDOWN.ul--;
+ faa:	04 45 80    	mov.w     0x8a0, w4
+ fac:	15 45 80    	mov.w     0x8a2, w5
+ fae:	61 02 52    	sub.w     w4, #0x1, w4
+ fb0:	e0 82 5a    	subb.w    w5, #0x0, w5
+ fb2:	04 45 88    	mov.w     w4, 0x8a0
+ fb4:	15 45 88    	mov.w     w5, 0x8a2
+ fb6:	01 00 37    	bra       0xfba <.L27>
+
+00000fb8 <.L28>:
+            } else {
+                __asm__("reset");
+ fb8:	00 00 fe    	reset     
+
+00000fba <.L27>:
+            }
+        }
+        ServiceUSB();   // Service any pending USB requests
+ fba:	13 fa 07    	rcall     0x3e2 <_ServiceUSB>
+
+00000fbc <.LBE2>:
+    }
+ fbc:	ed ff 37    	bra       0xf98 <.L29>
+Disassembly of section .dinit:
+
+00000fbe <.dinit>:
+ fbe:	9e 08 00    	nop       
+ fc0:	06 00 00    	nop       
+ fc2:	80 00 00    	nop       
+ fc4:	00 0a 00    	nop       
+ fc6:	80 00 00    	nop       
+ fc8:	80 00 00    	nop       
+ fca:	00 08 00    	nop       
+ fcc:	9e 00 00    	nop       
+ fce:	80 00 00    	nop       
+ fd0:	00 00 00    	nop       
+Disassembly of section .isr:
+
+00000fd2 <__DefaultInterrupt>:
+ fd2:	00 40 da    	.pword 0xda4000
+ fd4:	00 00 fe    	reset     

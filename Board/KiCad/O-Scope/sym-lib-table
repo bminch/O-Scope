@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name "Eclectronics")(type "Legacy")(uri "${KIPRJMOD}/../Eclectronics/Eclectronics.lib")(options "")(descr ""))
+  (lib (name "oscope-rescue")(type "Legacy")(uri "${KIPRJMOD}/oscope-rescue.lib")(options "")(descr ""))
+)

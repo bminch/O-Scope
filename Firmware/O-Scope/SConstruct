@@ -1,0 +1,30 @@
+
+proj_name = 'oscope4'
+env = Environment(PIC = '24FJ128GC006', 
+                  CC = 'xc16-gcc', 
+                  PROGSUFFIX = '.elf', 
+                  CFLAGS = '-g -omf=elf -x c -mcpu=$PIC', 
+                  LINKFLAGS = '-omf=elf -mcpu=$PIC -Wl,--script="app_p24FJ128GC006.gld",-Map=' + proj_name + '.map', 
+                  CPPPATH = '../lib')
+env.PrependENVPath('PATH', '/Applications/microchip/xc16/v1.70/bin')
+bin2hex = Builder(action = 'xc16-bin2hex $SOURCE -omf=elf',
+                  suffix = 'hex', 
+                  src_suffix = 'elf')
+env.Append(BUILDERS = {'Hex' : bin2hex})
+list = Builder(action = 'xc16-objdump -S -D $SOURCE > $TARGET', 
+               suffix = 'lst', 
+               src_suffix = 'elf')
+env.Append(BUILDERS = {'List' : list})
+
+env.Program(proj_name, ['oscope_main.c', 
+                        'oscope.c', 
+                        'wavegen.c', 
+                        'scope.c', 
+                        'sweep_at_4MSps.c', 
+                        'digout.c', 
+                        'parser.c', 
+                        'cdc.c', 
+                        'descriptors.c', 
+                        'usb.c']) 
+env.Hex(proj_name)
+env.List(proj_name)
